@@ -1,0 +1,12 @@
+.main-headercaterogy{
+    border-bottom: silver 1px solid;
+    height: 8vh;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.box-category{
+    color: #757575;
+}

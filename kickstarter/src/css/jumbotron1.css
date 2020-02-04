@@ -1,0 +1,32 @@
+.jumbotron-1{
+    /* border: brown 1px solid; */
+    height:90vh;
+    margin: 0;
+    padding: 0;
+}
+
+.box-jumbotron1{
+    /* border:blueviolet 1px solid; */
+    height: 92%;
+    width: 90%;
+    /* margin: 10px; */
+}
+
+.minibox-jumobtron1{
+    /* border: blueviolet 1px solid; */
+    height: 33%;
+    width: 90%;
+}
+
+.minibox-jumobtron1>div{
+ /* border: black 1px solid; */
+ margin: 5px 2px;
+}
+.minibox-jumobtron1>div>div {
+    /* border: black 1px solid; */
+    margin: 5px 2px;
+    height: 21%;
+    text-align: left;
+    justify-content: left;
+    padding-left: 2px;
+   }

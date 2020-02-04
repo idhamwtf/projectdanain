@@ -1,0 +1,21 @@
+.adminheader{
+    height: 10vh;
+    /* background-color: #05ce78; */
+    background-color: white;
+    /* color: #1b5e20; */
+
+    color: #05ce78;
+    font-weight: 500;
+}
+/* 
+.adminheader>div{
+    border: 1px black solid;
+} */
+
+.header-kiri-admin{
+    margin: 25px 70px;
+}
+
+.header-kanan-admin{
+    margin:25px 20px;
+}

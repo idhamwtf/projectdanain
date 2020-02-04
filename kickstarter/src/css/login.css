@@ -1,0 +1,24 @@
+
+.login{
+    margin: 0;
+    padding: 0;
+    height: 81vh;
+    border: transparent 1px solid;
+    background-image: url(https://ksr-ugc.imgix.net/assets/027/812/133/679294fd535da88c1ab8f6944d82ed86_original.jpg?ixlib=rb-2.1.0&w=680&fit=max&v=1579560598&auto=format&gif-q=50&q=92&s=257827566f4ccc1651d76229270246d1);
+    
+}
+
+.box-login{
+    background-color: white;
+    height: 60vh;
+    width: 48vh !important;
+    padding: 25px;
+    margin: 50px 0 0 37% !important;
+    border-radius: 2px;
+    box-shadow:  1px 1px 3px #e0e0e0, 1px 1px 3px #eeeeee, 2px 2px 5px 2px #bdbdbd ;
+    /* 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12); */
+}
+/* 
+
+.button-login{
+} */

@@ -1,0 +1,16 @@
+.main-header{
+    height: 10vh;
+    border: silver 1px solid;
+    margin: 0;
+    padding: 0;
+}
+
+.tes-font{
+    font-family: 'Sigmar One', cursive;
+    padding-top: 10px;
+}
+
+.box-header{
+    /* border: blue 1px solid; */
+    margin: auto;
+}

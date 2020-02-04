@@ -1,0 +1,27 @@
+.footertron{
+    height: 30vh;
+    border: 1px silver solid;
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-weight: 600;
+}
+
+.footer-box{
+    /* border: 1px red solid; */
+    width: 33%;
+    margin: 5px;
+    /* font-weight:700;
+    font-size:14px; 
+    color:#01579b */
+}
+
+.footer-box-content{
+    margin: 5px;
+    padding: 10px;
+}
+
+
+.footer-box-content-social{
+    padding: 5px;
+}

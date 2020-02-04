@@ -1,0 +1,28 @@
+.admin{
+    /* border: 1px silver solid; */
+    max-height: 100vh;
+    color: white;
+    font-weight: 700;
+}
+
+.admin-dashboard{
+    width: 100%;
+    /* border: 1px black solid; */
+}
+
+.box-admin{
+    /* border: 1px red solid; */
+    min-height: 90vh;
+    background-color:'#05ce78' !important;
+    color: #05ce78;
+}
+
+.isi-dashboard{
+    margin: 50px 0;
+    height: 5vh;
+    justify-content: center;
+    text-align: center;
+    padding-top: 6px;
+    /* background-color: #69f0ae; */
+    color:#1b5e20;
+}
