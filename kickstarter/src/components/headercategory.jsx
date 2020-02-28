@@ -6,10 +6,11 @@ import {useSelector} from 'react-redux'
 function Headercategory(){
 
     const { header } = useSelector(state=>state.HeaderFooter)
-    const [role,setrole] = useState('user')
+    // const [role,setrole] = useState('user')
+    const {username,id,role} = useSelector(state=>state.auth)
     console.log('stateheader', header)
 
-    if(header===1 || role==='admin'){
+    if(header===1 || role==='1'){
         return null
     }else
     return(

@@ -1,4 +1,4 @@
-const {mysqldb} = require('./../connection')
+const {mysqldb} = require('../connection')
 
 module.exports={
     getusers:(req,res)=>{

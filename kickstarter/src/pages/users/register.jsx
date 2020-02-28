@@ -2,9 +2,9 @@ import React,{useEffect, createRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import '../css/register.css'
+import '../../css/register.css'
 import {useSelector, useDispatch} from 'react-redux'
-import { changeHeaderAction, changeFooterAction} from '../redux/actions'
+import { changeHeaderAction, changeFooterAction, UserRegister} from '../../redux/actions'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,10 +18,10 @@ const useStyles = makeStyles(theme => ({
 
 function Login() {
     const classes = useStyles();
-    let username = createRef()
-    let password = createRef() 
-    let repassword = createRef()
-    let email = createRef() 
+    let usernameref = createRef()
+    let passwordref = createRef() 
+    let repasswordref = createRef()
+    let emailref = createRef() 
 
     
     const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
@@ -34,12 +34,16 @@ function Login() {
 
 
     const onClickRegister=()=>{
-    
-        console.log(username.current.value)
-        console.log(password.current.value)
-        console.log(repassword.current.value)
-        console.log(email.current.value)
-        // console.log(password)
+        var username = usernameref.current.value
+        var password = passwordref.current.value
+        var repassword = repasswordref.current.value
+        var email = emailref.current.value
+        // console.log(username)
+
+        if(password===repassword){
+          dispatch(UserRegister({username,password,email}))
+        }
+        
     }
 
 
@@ -47,10 +51,10 @@ function Login() {
       <div className='register'>
         <form className={classes.root}  noValidate autoComplete="off">
             <div className='d-flex flex-column box-login'> 
-        <TextField id="standard-basic" label="Username" className='m-2' inputRef={username} />
-        <TextField id="standard-basic" label="Password" type="password" className='m-2' inputRef={password}/>
-        <TextField id="standard-basic" label="Re-enter Password" type="password" className='m-2' inputRef={repassword}/>
-        <TextField id="standard-basic" label="Email" type="email" className='m-2' inputRef={email}/>
+        <TextField id="standard-basic" label="Username" className='m-2' inputRef={usernameref} />
+        <TextField id="standard-basic" label="Password" type="password" className='m-2' inputRef={passwordref}/>
+        <TextField id="standard-basic" label="Re-enter Password" type="password" className='m-2' inputRef={repasswordref}/>
+        <TextField id="standard-basic" label="Email" type="email" className='m-2' inputRef={emailref}/>
         {/* <div style={{marginTop:'auto'}}> */}
         <Button variant="contained" color="primary" className='button-login m-2' onClick={onClickRegister} >Register</Button>
         {/* </div> */}

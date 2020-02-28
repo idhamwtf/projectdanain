@@ -10,9 +10,11 @@ app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json())
 
 
-const {usersRouters} = require('./routers')
+const {usersRouters,AuthenticationRouters, ProductRouters} = require('./routers')
 
 app.use('/users',usersRouters)
+app.use('/product', ProductRouters)
+app.use('/auth',AuthenticationRouters)
 
 
 app.get('/',(req,res)=>{

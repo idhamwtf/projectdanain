@@ -1,5 +1,9 @@
-const usersRouters=require('./usersRouters')
+const usersRouters=require('./usersRouter')
+const AuthenticationRouters=require('./AuthenticationRouter')
+const ProductRouters = require('./ProductRouter')
 
 module.exports={
-    usersRouters
+    usersRouters,
+    AuthenticationRouters,
+    ProductRouters
 }

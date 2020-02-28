@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/admin.css'
+import '../../css/admin.css'
 import MaterialTable from 'material-table';
 
 
@@ -24,8 +24,34 @@ export default function Admin(){
             surname: 'Baran',
             birthYear: 2017,
             birthCity: 34,
+          },{
+            name: 'Zerya Betül',
+            surname: 'Baran',
+            birthYear: 2017,
+            birthCity: 34,
+          },{
+            name: 'Zerya Betül',
+            surname: 'Baran',
+            birthYear: 2017,
+            birthCity: 34,
+          },{
+            name: 'Zerya Betül',
+            surname: 'Baran',
+            birthYear: 2017,
+            birthCity: 34,
+          },{
+            name: 'Zerya Betül',
+            surname: 'Baran',
+            birthYear: 2017,
+            birthCity: 34,
+          },{
+            name: 'Zerya Betül',
+            surname: 'Baran',
+            birthYear: 2017,
+            birthCity: 34,
           },
         ],
+        
       });
     return(
         <div className='admin'>
@@ -36,7 +62,6 @@ export default function Admin(){
                    <div className='isi-dashboard'>LIST PEMBAYARAN</div>
                </div>
                <div className='box-admin' style={{width:'85%', backgroundColor:'#e6faf1', color:'black'}}>
-                   asd
                </div>
            </div>
         </div>
