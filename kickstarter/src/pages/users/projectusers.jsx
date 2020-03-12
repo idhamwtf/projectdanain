@@ -1,10 +1,13 @@
 import React, {useEffect, createRef, useState}from 'react';
 import '../../css/projectusers.css'
 import {useSelector, useDispatch} from 'react-redux'
-import { changeHeaderAction, changeFooterAction, UserRegister} from '../../redux/actions'
+import { changeHeaderAction, changeFooterAction, UserRegister, UserAddProject} from '../../redux/actions'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { CustomInput } from 'reactstrap';
+import Axios from 'axios';
+import { APIURL } from '../../helper/apiurl';
 
 
 
@@ -13,66 +16,123 @@ import Button from '@material-ui/core/Button';
 const Projectusers =()=>{
 
     const [project,setproject] = useState({})
+    const [addimagefile,setimageadd]=useState({
+        addImageFileName:'Select your Image',
+        addImageFile:undefined,
+      })
 
     const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
     const dispatch = useDispatch()
+    const {username,id,role} = useSelector(state=>state.auth)
 
-    useEffect(()=>{
-        dispatch(changeHeaderAction(1))
-        // dispatch(changeFooterAction(1))
-      },[])
+        useEffect(()=>{
+            dispatch(changeHeaderAction(1))
+            // console.log(id)
+            // dispatch(changeFooterAction(1))
+        },[])
+        console.log(id)
 
-      let projectnameref = createRef()
-      let projectimageref = createRef() 
-      let projectdescref = createRef()
-      let moneygoalref = createRef() 
-      let timetargetref = createRef()
-      let categoryref = createRef()
+        const Hari=(a='')=>{
+            let newDate = new Date()
+            let date = newDate.getDate();
+            let month = newDate.getMonth() + 1;
+            let year = newDate.getFullYear();
+            return `${year}${a}${month<10?`0${month}`:`${month}`}${a}${date}`
+         }
+
+
+
+      let namaproject = createRef()
+      let gambarproject = createRef() 
+      let shortdescproject = createRef()
+      let aboutproject = createRef()
+      let targetuang = createRef() 
+      let targetwaktu = createRef()
+      let categoryproject = createRef()
+
+      const onAddImageFileChange=(event)=>{
+        // console.log(document.getElementById('addImagePost').files[0])
+        console.log(event.target.files[0])
+        var file=event.target.files[0]
+        if(file){
+            setimageadd({...addimagefile,addImageFileName:file.name,addImageFile:event.target.files[0]})
+        }else{
+            setimageadd({...addimagefile,addImageFileName:'Select Image...',addImageFile:undefined})
+        }
+      }
+
 
 
       const onSubmitProject =()=>{
-            projectnameref = projectnameref.current.value
-            projectimageref = projectimageref.current.value
-            projectdescref = projectdescref.current.value
-            moneygoalref = moneygoalref.current.value
-            timetargetref = timetargetref.current.value
-            categoryref = categoryref.current.value
+            var formdata=new FormData()
+            namaproject = namaproject.current.value
+            shortdescproject = shortdescproject.current.value
+            // gambarproject = gambarproject.current.value
+            aboutproject = aboutproject.current.value
+            targetuang = targetuang.current.value
+            targetwaktu = targetwaktu.current.value
+            categoryproject = categoryproject.current.value
                 
             const data = {
-                projectnameref,
-                projectimageref,
-                projectdescref,
-                moneygoalref,
-                timetargetref,
-                categoryref
+                namaproject,
+                aboutproject,
+                shortdescproject,
+                targetuang,
+                targetwaktu,
+                categoryproject,
+                gambarproject,
+                iduser:id,
+                tanggalpost:Hari(),
+                deleted:0
             }
+              formdata.append('image',addimagefile.addImageFile)
+              formdata.append('data',JSON.stringify(data))
+              var Headers={
+                headers:
+                {
+                    'Content-Type':'multipart/form-data',
+                }
+              }
 
-            console.log(data)
-            console.log(projectnameref)
+            //   UserAddProject(formdata)
+            Axios.post(`${APIURL}product/addproject`,formdata,Headers)
+            .then((res)=>{
+                console.log('berhasil')
+            }).catch((err)=>{
+                console.log('err')
+            })
+            
       }
+      console.log(Hari())
   
-return (
+      return (
     <div className='projectadduser'>
         <center>
             <div style={{fontSize:'34px', fontWeight:'200', marginRight:'2%', marginTop:'5px'}}>Start your project</div>
-            <div className='d-flex flex-column' style={{border:'1px black solid', width:'5 0%', height:'100%'}}>
-                <TextField id="standard-basic" label="Your Project Name" className='m-2' inputRef={projectnameref} />
-                <TextField id="standard-basic" label="Your Project Image" className='m-2'  inputRef={projectimageref}/>
+            <div className='d-flex flex-column' style={{ width:'35%', height:'100%'}}>
+                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Name" className='m-2' inputRef={namaproject} />
+                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="What is your project ?" className='m-2' inputRef={shortdescproject} />
+                {/* <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Image" className='m-2'  inputRef={gambarproject}/> */}
+                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Money Goal" className='m-2' inputRef={targetuang} />
+                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Time Target" className='m-2' inputRef={targetwaktu} />
+                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}}    id="standard-basic" label="Category" className='m-2' inputRef={categoryproject} />
+                <CustomInput className='inputporjectusers' style={{width:'98%', marginTop:'10px'}} type='file' label={addimagefile.addImageFileName} id='addImagePost' className='form-control' 
+                onChange={onAddImageFileChange}
+                 />
                 <TextField
+                    className='inputporjectusers mt-3' style={{width:'98%', marginTop:'5px', marginBottom:'10px'}}
                     id="outlined-multiline-static"
-                    label="Your Project Description"
+                    label="Tell us more about your project"
                     multiline
                     rows="4"
                     variant="outlined"
-                    inputRef={projectdescref}
+                    inputRef={aboutproject}
                     />
-                <TextField id="standard-basic" label="Money Goal" className='m-2' inputRef={moneygoalref} />
-                <TextField id="standard-basic" label="Time Target" className='m-2' inputRef={timetargetref} />
-                <TextField id="standard-basic" label="Category" className='m-2' inputRef={categoryref} />
-                <Button variant="contained" color="primary" className='button-login m-2'  onClick={onSubmitProject}>Submit</Button>
+                <Button variant="contained" color="primary" className='button-login mt-3'  onClick={onSubmitProject}>Submit</Button>
             </div>
         </center>
     </div>
+   
 
 )
 }
@@ -136,6 +196,7 @@ export default Projectusers;
 //                                 <FormText >Foto</FormText>
 //                                 <input type="file" name="file" onChange={this.onChangeImage} />
 //                                 <FormText color="muted">
+
 //                                     Format foto harus dalam bentuk PNG
 //                                 </FormText>
 //                             </FormGroup>

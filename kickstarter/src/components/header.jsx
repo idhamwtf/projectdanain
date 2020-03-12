@@ -4,14 +4,24 @@ import SearchIcon from '@material-ui/icons/Search';
 import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import Headeradmin from './headeradmin'
+import {Logoutaction} from './../redux/actions'
 
 function Header (){
     const [loading,setloading] = useState(true)
 
     const {username,id,role} = useSelector(state=>state.auth)
 
+    const dispatch = useDispatch()
+
+
     useEffect(()=>{
     },[])
+
+    const Logoutuser=()=>{
+        localStorage.removeItem('id')
+        localStorage.removeItem('username')
+        dispatch(Logoutaction)
+    }
     
     console.log(role,'role')
 
@@ -49,7 +59,11 @@ function Header (){
                         <Link to='/login'><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Login</span></div></Link>
                         </div>
                         :
+                        <div className='d-flex flex-row'>
                         <Link to='/'><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Hello, {username}</span></div></Link>
+                        <Link to='/myproject'><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>My Project</span></div></Link>
+                        <Link to='/' onClick={Logoutuser}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Logout</span></div></Link>
+                        </div>
                         // null
                     }
                 </div>

@@ -1,9 +1,20 @@
 import React from 'react';
 import '../css/headeradmin.css'
+import {useSelector, useDispatch} from 'react-redux'
+import {Logoutaction} from './../redux/actions'
+import {Link} from 'react-router-dom'
 
 
 
 export default function Headeradmin(){
+    const dispatch = useDispatch()
+
+    const Logoutuser=()=>{
+        localStorage.removeItem('id')
+        localStorage.removeItem('username')
+        dispatch(Logoutaction)
+    }
+    
     return (
         <div className='d-flex flex-row adminheader'>
             <div className='header-kiri-admin'>
@@ -13,9 +24,10 @@ export default function Headeradmin(){
                 <div style={{}} className='header-kanan-admin'>
                     Back to home
                 </div>
-                <div style={{}} className='header-kanan-admin'>
+                {/* <div style={{}} className='header-kanan-admin'>
                     Logout
-                </div>
+                </div> */}
+                <Link to='/' onClick={Logoutuser}><div className=' header-kanan-admin my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Logout</span></div></Link>
             </div>
         </div>
     )

@@ -14,6 +14,7 @@ import Axios from 'axios';
 import { APIURL } from './helper/apiurl';
 import { reLogin } from './redux/actions';
 import {useDispatch, useSelector} from 'react-redux'
+import MyProject from './pages/users/myproject'
 
 function App() {
   const dispatch = useDispatch()
@@ -30,7 +31,7 @@ function App() {
     }
   },[])
   
-  console.log(role)
+  // console.log(role)
   return (
     <div className="App">
       <Header/>
@@ -42,6 +43,7 @@ function App() {
         <Route path={'/admin'} exact component={Admin}/>
         <Route path={'/verified'} exact component={Verified}/>
         <Route path={'/project'} exact component={Project}/>
+        <Route path={'/myproject'} exact component = {MyProject}/>
       </Switch>
       <Footer/>
     </div>
