@@ -1,0 +1,10 @@
+.box-myproject{
+    border-bottom: silver 1px solid;
+    height: 40vh;
+}
+
+.titlebox-myproject{
+    border-bottom: 1px silver solid;
+    font-size: 36px;
+    padding: 20px 10px;
+}

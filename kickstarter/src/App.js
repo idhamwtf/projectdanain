@@ -15,6 +15,7 @@ import { APIURL } from './helper/apiurl';
 import { reLogin } from './redux/actions';
 import {useDispatch, useSelector} from 'react-redux'
 import MyProject from './pages/users/myproject'
+import {dataProject} from './redux/actions'
 
 function App() {
   const dispatch = useDispatch()
@@ -28,10 +29,10 @@ function App() {
       .then((res)=>{
         dispatch(reLogin(res.data))
       })
+      dispatch(dataProject(id))
     }
   },[])
   
-  // console.log(role)
   return (
     <div className="App">
       <Header/>

@@ -8,7 +8,7 @@ function Headercategory(){
     const { header } = useSelector(state=>state.HeaderFooter)
     // const [role,setrole] = useState('user')
     const {username,id,role} = useSelector(state=>state.auth)
-    console.log('stateheader', header)
+    // console.log('stateheader', header)
 
     if(header===1 || role==='1'){
         return null

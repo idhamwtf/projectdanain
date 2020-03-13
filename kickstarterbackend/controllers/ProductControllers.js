@@ -73,5 +73,26 @@ module.exports={
             if(err) res.status(500).send({message:err})
             return res.status(200).send(result)
         })
+    },
+    editProject:(req,res)=>{
+
+    },
+    getProject:(req,res)=>{
+        var sql = `select * from projectusers p where p.deleted=0;`
+
+        mysqldb.query(sql,(err,result)=>{
+            if(err) res.status(500).send({message:err})
+            console.log(result)
+            return res.status(200).send(result)
+        })
+    },
+    getProjectUser:(req,res)=>{
+        console.log(req.params)
+        var sql = `select * from projectusers p where p.iduser=${req.params.id} and p.deleted=0;`
+        mysqldb.query(sql,(err,result)=>{
+            if(err) res.status(500).send({message:err})
+            console.log(result)
+            return res.status(200).send(result)
+        })
     }
 }

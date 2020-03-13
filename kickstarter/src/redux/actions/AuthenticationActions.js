@@ -44,6 +44,7 @@ export const loginAction = (username, password)=>{
                 dispatch({type: USER_LOGIN_SUCCESS, payload:res.data})
                 localStorage.setItem("username", res.data.username)
                 localStorage.setItem("id", res.data.id)
+                dispatch({type:'REDIRECT'})
             }else{
                 dispatch({type: AUTH_LOGIN_ERROR, payload: res.data.message})
             }

@@ -70,7 +70,6 @@ const Projectusers =()=>{
             // gambarproject = gambarproject.current.value
             aboutproject = aboutproject.current.value
             targetuang = targetuang.current.value
-            targetwaktu = targetwaktu.current.value
             categoryproject = categoryproject.current.value
                 
             const data = {
@@ -78,7 +77,6 @@ const Projectusers =()=>{
                 aboutproject,
                 shortdescproject,
                 targetuang,
-                targetwaktu,
                 categoryproject,
                 gambarproject,
                 iduser:id,
@@ -114,7 +112,6 @@ const Projectusers =()=>{
                 <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="What is your project ?" className='m-2' inputRef={shortdescproject} />
                 {/* <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Image" className='m-2'  inputRef={gambarproject}/> */}
                 <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Money Goal" className='m-2' inputRef={targetuang} />
-                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Time Target" className='m-2' inputRef={targetwaktu} />
                 <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}}    id="standard-basic" label="Category" className='m-2' inputRef={categoryproject} />
                 <CustomInput className='inputporjectusers' style={{width:'98%', marginTop:'10px'}} type='file' label={addimagefile.addImageFileName} id='addImagePost' className='form-control' 
                 onChange={onAddImageFileChange}

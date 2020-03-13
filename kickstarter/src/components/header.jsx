@@ -23,7 +23,7 @@ function Header (){
         dispatch(Logoutaction)
     }
     
-    console.log(role,'role')
+    // console.log(role,'role')
 
     if(role==='1'){
         return(

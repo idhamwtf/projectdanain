@@ -8,11 +8,12 @@ const PORT = 1231
 app.use(cors())
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json())
+app.use(express.static('public'))
 
 
 const {usersRouters,AuthenticationRouters, ProductRouters} = require('./routers')
 
-app.use('/users',usersRouters)
+// app.use('/users',usersRouters)
 app.use('/product', ProductRouters)
 app.use('/auth',AuthenticationRouters)
 

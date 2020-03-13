@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import '../../css/login.css'
 import {useSelector, useDispatch} from 'react-redux'
 import { changeHeaderAction, changeFooterAction, loginAction} from '../../redux/actions'
+import { useState } from 'react';
+import {Redirect} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,13 +18,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
 function Login() {
-    const classes = useStyles();
+  const classes = useStyles();
+  // const [redirect, setredirect]= useState(false)
     let usernameref = createRef()
     let passwordref = createRef() 
 
     
     const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
+    const redirect = useSelector(state=>state.Redirect)
     const dispatch = useDispatch()
     
     useEffect(()=>{
@@ -37,7 +42,9 @@ function Login() {
 
       dispatch(loginAction(username,password))
     }
-
+    if(redirect){
+      return <Redirect to={'/'}/>
+    }
 
   return (
       <div className='login'>
