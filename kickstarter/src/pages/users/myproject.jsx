@@ -7,6 +7,7 @@ import { APIURL,APIURLimage } from '../../helper/apiurl';
 import './../../css/myproject.css'
 import Button from '@material-ui/core/Button'
 import Modal from './../../components/modal'
+import { Link } from 'react-router-dom';
 
 // style={{height:'60%', width:'75%', margin:'15px 10%'}} 
 const MyProject =()=>{
@@ -44,16 +45,22 @@ const MyProject =()=>{
         //     console.log(val.gambarproject, index)
         // })
         return datadariredux.map((val,index)=>{
+            console.log(val.percentdonate)
             return(
              <div className='box-myproject d-flex flex-row' key={index}>
-                <div style={{width:'45vh', marginTop:'46px', marginLeft:'50px' }}>
-                    <img style={{width:'100%'}} src={APIURLimage+val.gambarproject} alt=""/>
-                    <Progressbar value='30' height='15px' color='secondary' />
-                </div>
+                 <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
+                    <div style={{width:'45vh', marginTop:'46px', marginLeft:'50px' }}>
+                        <img style={{width:'100%'}} src={APIURLimage+val.gambarproject} alt=""/>
+                        <Progressbar defaultValue={0} value={val.percentdonate} height='15px' color='secondary' />
+                    </div>
+                 </Link>
                 <div style={{marginTop:'23px', marginLeft:'10px'}}>
+                    <Link  to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'24px', fontWeight:'600'}}>{val.namaproject}</div>
+                    </Link>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500'}}>{val.shortdescproject}</div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'15px', fontWeight:'500', color:'green'}}>Target IDR {val.targetuang}</div>
+                    <div className='mt-3' style={{textAlign:'left', fontSize:'15px', fontWeight:'500', color:'green'}}>Funded : {parseInt(val.percentdonate)} %</div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'13px', fontWeight:'500'}}>Category : {val.categoryproject}</div>
                     <div style={{justifyContent:'center', maxWidth:'600px'}}>    
                     <Button variant="contained" color="secondary" style={{marginTop:'50px'}} onClick={()=>toggleModal(index)}>Edit This Project</Button>
@@ -66,7 +73,7 @@ const MyProject =()=>{
 
 
     const toggleModal=(index)=>{
-        setdataedit(data[index])
+        setdataedit(datadariredux[index])
         setmodal(true)
     }
 

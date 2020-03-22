@@ -1,22 +1,72 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../css/jumbotron1.css'
 import Progressbar from '../components/progressbar'
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import Axios from 'axios';
+import { APIURL, APIURLimage } from '../helper/apiurl';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import {Link} from 'react-router-dom'
 
 
 
 function Jumbotron1(){
+
+    const [datafeatured,setdatafeatured] = useState([])
+    const [loading,setloading] = useState(true)
+    const {username} = useSelector(state=>state.auth)
+
+    useEffect(()=>{
+        Axios.get(`${APIURL}product/getfeatured`)
+        .then((res)=>{
+            // console.log(res.data)
+            setdatafeatured(res.data)
+            setloading(false)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    },[])
+
+    const renderFeatured=()=>{
+        return(
+
+            datafeatured.map((val,index)=>{
+                console.log(val,index)
+                return(
+                    <div key={index} style={{height:'60%', width:'75%', margin:'15px 10%'}} >
+                    <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
+                        <img style={{height:'100%',width:'100%'}} src={`${APIURLimage+val.gambarproject}`} alt=""/>
+                        <Progressbar defaultValue={0} value={parseInt(val.percentdonate)} height='15px' color='secondary' />
+                    <div className='mt-3' style={{textAlign:'left', fontSize:'24px', fontWeight:'600'}}>{val.namaproject}</div>
+                    <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500'}}>{val.shortdescproject}</div>
+                    <div className='mt-3' style={{textAlign:'left', fontSize:'13px', fontWeight:'500', color:'#757575'}}>By {val.username}</div>
+                    </Link>
+                </div>
+                )
+            })
+            )
+    }
+
+
+    if(loading){
+        return (
+            <div>
+                Loading...
+            </div>
+        )
+    }
     return (
         <div className='jumbotron-1 d-flex flex-row'>
             <div className='box-jumbotron1 my-5' style={{borderRight:'1px silver solid'}} >
                 <div style={{textAlign:'left', margin:'15px 10%', color:'#757575', fontWeight:'bold'}}>Featured Project</div>
-                <div style={{height:'60%', width:'75%', margin:'15px 10%'}} >
+                {renderFeatured()}
+                {/* <div style={{height:'60%', width:'75%', margin:'15px 10%'}} >
                     <img style={{height:'100%',width:'100%'}} src="https://ksr-static.imgix.net/8v9uwida-valor_anthology.png?ixlib=rb-2.1.0&auto=compress%2Cformat&w=1000&fit=min&s=4bcc268b184adad6cba9bb23fc75c1e7" alt=""/>
                     <Progressbar value='30' height='15px' color='secondary' />
                     <div className='mt-3' style={{textAlign:'left', fontSize:'24px', fontWeight:'600'}}>Valor Anthology : Volume 3</div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500'}}>Fairy-tale comics starring courageous heroines</div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'13px', fontWeight:'500', color:'#757575'}}>By Megan Lavey-Heaton</div>
-                </div>
+                </div> */}
             </div>
             <div className='box-jumbotron1 my-5'>
             <div style={{textAlign:'left', margin:'15px 10%', color:'#757575', fontWeight:'bold'}}>Recommend for you</div>

@@ -29,7 +29,7 @@ export default (state=INITIAL_STATE, action)=>{
             console.log(action.payload)
             return {...state,...action.payload, authchecked:true,loginstatus:true }
         case USER_LOGOUT:
-            return {...INITIAL_STATE, authchecked:true}
+            return {...INITIAL_STATE}
         case AUTH_LOADING:
             return {...state,error:"",loading:true}
         case AUTH_SYSTEM_ERROR:

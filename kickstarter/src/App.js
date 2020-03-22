@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import './App.css';
 import Header from './components/header'
 import Headercategory from './components/headercategory'
@@ -16,14 +16,16 @@ import { reLogin } from './redux/actions';
 import {useDispatch, useSelector} from 'react-redux'
 import MyProject from './pages/users/myproject'
 import {dataProject} from './redux/actions'
+import ProjectDetails from './pages/users/projectdetails'
 
 function App() {
   const dispatch = useDispatch()
   const {username,id,role} = useSelector(state=>state.auth)
+  const [loading,setloading] = useState(true)
 
   useEffect(()=>{
     var id = localStorage.getItem('id')
-    console.log(id)
+    // console.log(id)
     if(id){
       Axios.get(`${APIURL}auth/login/${id}`)
       .then((res)=>{
@@ -31,8 +33,15 @@ function App() {
       })
       dispatch(dataProject(id))
     }
+    setloading(false)
+
   },[])
-  
+
+  if(loading){
+    return(
+      <div>Loading...</div>
+    )
+  }
   return (
     <div className="App">
       <Header/>
@@ -45,6 +54,8 @@ function App() {
         <Route path={'/verified'} exact component={Verified}/>
         <Route path={'/project'} exact component={Project}/>
         <Route path={'/myproject'} exact component = {MyProject}/>
+        <Route path={'/projectdetail/:id'} exact component ={ProjectDetails}/>
+        {/* <Route path={'/logout'} exact component ={Homepage}/> */}
       </Switch>
       <Footer/>
     </div>

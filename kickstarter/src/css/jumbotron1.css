@@ -1,6 +1,6 @@
 .jumbotron-1{
     /* border: brown 1px solid; */
-    height:90vh;
+    max-height:90vh;
     margin: 0;
     padding: 0;
 }

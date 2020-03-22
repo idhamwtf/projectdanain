@@ -39,7 +39,7 @@ export const loginAction = (username, password)=>{
                 password
             }
         }).then((res)=>{
-            // console.log(res.data)
+            console.log(res.data)
             if(res.data.status !== "error"){
                 dispatch({type: USER_LOGIN_SUCCESS, payload:res.data})
                 localStorage.setItem("username", res.data.username)
@@ -53,14 +53,15 @@ export const loginAction = (username, password)=>{
 }
 
 export const reLogin=(res)=>{
-    // console.log(res)
+    console.log(res)
     return dispatch =>{
         dispatch({type:USER_LOGIN_SUCCESS, payload:res})
     }
 }
 
 export const Logoutaction=()=>{
-return {
-    type:USER_LOGOUT
+return dispatch =>{
+    dispatch({type:USER_LOGOUT})
+    dispatch({type:'REDIRECT'})
 }
 }

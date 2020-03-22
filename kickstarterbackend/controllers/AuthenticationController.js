@@ -27,7 +27,7 @@ module.exports={
                     password:hashpassword,
                     email,
                     status:0,
-                    roleid:2,
+                    role:2,
                     lastlogin:'1-1-1970'
                 }
                 sql = `insert into users set ?`

@@ -11,11 +11,12 @@ app.use(BodyParser.json())
 app.use(express.static('public'))
 
 
-const {usersRouters,AuthenticationRouters, ProductRouters} = require('./routers')
+const {usersRouters,AuthenticationRouters, ProductRouters, DonateRouters} = require('./routers')
 
 // app.use('/users',usersRouters)
 app.use('/product', ProductRouters)
 app.use('/auth',AuthenticationRouters)
+app.use('/donate', DonateRouters)
 
 
 app.get('/',(req,res)=>{

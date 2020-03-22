@@ -4,7 +4,7 @@ import Progressbar from '../components/progressbar'
 
 export default function Jumbotron2(){
     return (
-        <div className='jumbotron-2 d-flex flex-row'>
+        <div className='jumbotron-2 d-flex flex-row' style={{marginTop:'25px'}}>
             <div className='jumbotron2-box' style={{marginLeft:'5%'}}>
                 <div>
                     <img style={{width:'100%'}} src="https://ksr-ugc.imgix.net/assets/027/913/883/26ef6b50ea3962431665856e6312fb23_original.jpg?ixlib=rb-2.1.0&crop=faces&w=352&h=198&fit=crop&v=1580406840&auto=format&frame=1&q=92&s=bde0ac2fced52dbccc141462fb58ef14" alt=""/>

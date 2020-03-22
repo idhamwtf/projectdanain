@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import '../../css/register.css'
 import {useSelector, useDispatch} from 'react-redux'
 import { changeHeaderAction, changeFooterAction, UserRegister} from '../../redux/actions'
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function Login() {
+function Register() {
     const classes = useStyles();
     let usernameref = createRef()
     let passwordref = createRef() 
@@ -26,6 +27,7 @@ function Login() {
     
     const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
     const dispatch = useDispatch()
+    const {register} = useSelector(state=>state.auth)
     
     useEffect(()=>{
       dispatch(changeHeaderAction(1))
@@ -46,7 +48,9 @@ function Login() {
         
     }
 
-
+    if(register){
+      return <Redirect to={'/login'}/>
+    }
   return (
       <div className='register'>
         <form className={classes.root}  noValidate autoComplete="off">
@@ -64,4 +68,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
