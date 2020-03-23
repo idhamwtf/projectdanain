@@ -93,7 +93,7 @@ module.exports={
     getProjectUser:(req,res)=>{
         // console.log(req.params)
         // var sql = `select * from projectusers p where p.iduser=${req.params.id} and p.deleted=0;`
-        var sql=`select ps.*,sum(case when d.confirm!=0 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join donation d on ps.id=d.idproject where ps.iduser=${req.params.id} and ps.deleted=0 group by ps.id;`
+        var sql=`select ps.*,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join donation d on ps.id=d.idproject where ps.iduser=${req.params.id} and ps.deleted=0 group by ps.id;`
         mysqldb.query(sql,(err,result)=>{
             if(err) {
                 res.status(500).send({message:err}
@@ -105,9 +105,9 @@ module.exports={
     },
     getFeatured:(req,res)=>{
         // var sql = `select p.*,u.username from projectusers p join users u on p.iduser=u.id where deleted=0 limit 1;`
-        // var sql = `select ps.*,u.username,sum(case when d.confirm!=0 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where deleted=0 order by id limit 1;`
-        // var sql = `select ps.*,u.username,sum(case when d.confirm!=0 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.id=${id} and deleted=0;`
-        var sql = `select ps.*,u.username,sum(case when d.confirm!=0 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where deleted=0 group by ps.id order by rand() limit 1;`
+        // var sql = `select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where deleted=0 order by id limit 1;`
+        // var sql = `select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.id=${id} and deleted=0;`
+        var sql = `select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.deleted=0 group by ps.id order by rand() limit 1;`
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err})
             res.status(200).send(result)
@@ -116,7 +116,7 @@ module.exports={
     getProjectDetail:(req,res)=>{
         console.log(req.params, 'apramsdetail')
         let {id} = req.params
-        var sql = `select ps.*,u.username,sum(case when d.confirm!=0 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.id=${id} and deleted=0;`
+        var sql = `select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.id=${id} and deleted=0;`
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err})
             console.log(result, 'result')
@@ -144,7 +144,7 @@ module.exports={
             offset=pageSize*(page -1)
         }
         // console.log(req.params.page)
-        var sql=`select ps.*,u.username,sum(case when d.confirm!=0 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.deleted=0 group by ps.id limit ? offset ?;`
+        var sql=`select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.deleted=0 group by ps.id limit ? offset ?;`
         mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{
             if(err2) res.status(500).send({message:err2})
             const pageOfdata = result2

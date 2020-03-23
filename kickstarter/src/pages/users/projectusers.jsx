@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import { CustomInput } from 'reactstrap';
 import Axios from 'axios';
 import { APIURL } from '../../helper/apiurl';
+import moment from 'moment'
 
 
 
@@ -81,8 +82,8 @@ const Projectusers =()=>{
                 categoryproject,
                 gambarproject,
                 iduser:id,
-                tanggalpost:Hari(),
-                deleted:0
+                deleted:0,
+                datepost:moment().format('MMMM Do YYYY, h:mm:ss a')
             }
               formdata.append('image',addimagefile.addImageFile)
               formdata.append('data',JSON.stringify(data))

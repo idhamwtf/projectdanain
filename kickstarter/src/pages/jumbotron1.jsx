@@ -59,7 +59,7 @@ function Jumbotron1(){
                     <div key={index} style={{height:'60%', width:'75%', margin:'15px 10%'}} >
                     <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                         <img style={{height:'100%',width:'100%'}} src={`${APIURLimage+val.gambarproject}`} alt=""/>
-                        <Progressbar defaultValue={0} value={parseInt(val.percentdonate)} height='15px' color='secondary' />
+                        <Progressbar defaultValue={0} value={parseInt(parseInt(val.percentdonate))} height='15px' color='secondary' />
                     <div className='mt-3' style={{textAlign:'left', fontSize:'24px', fontWeight:'600'}}>{val.namaproject}</div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500'}}>{val.shortdescproject}</div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'13px', fontWeight:'500', color:'#757575'}}>By {val.username}</div>
@@ -86,7 +86,7 @@ function Jumbotron1(){
                         </Link>
                         </div>                        
                         <div className='minibox-funded' style={{color:'green', fontWeight:'600'}} >
-                            {val.percentdonate}% Funded
+                            {parseInt(val.percentdonate)}% Funded
                         </div>
                         <div style={{color:'#757575', fontWeight:'500'}}>
                             By {val.username}
