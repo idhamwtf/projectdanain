@@ -91,7 +91,7 @@ const ListBayar=()=>{
                         <div style={{marginBottom:'1px', color:'green'}}>Target : {val.targetuang}</div>
                         <div style={{marginBottom:'1px', color:'green'}}>Funded : {val.percentdonate}%</div>
                         <div style={{marginBottom:'1px',fontWeight:'500'}}>By user : {val.username}</div>
-                        <div style={{marginBottom:'1px',fontWeight:'400'}}>Tanggal post : {val.tanggalpost}</div>
+                        <div style={{marginBottom:'1px',fontWeight:'400'}}>Tanggal post : {val.datepost}</div>
                     </div>
                     {/* <div>Jumlah Donasi</div> */}
                     {/* <div style={{marginLeft:'200px'}}>Bukti Donasi</div> */}

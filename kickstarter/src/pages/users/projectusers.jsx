@@ -73,6 +73,7 @@ const Projectusers =()=>{
             aboutproject = aboutproject.current.value
             targetuang = targetuang.current.value
             categoryproject = categoryproject.current.value
+            var myDate =  moment().format("YYYY-MM-DD HH:mm:ss");
                 
             const data = {
                 namaproject,
@@ -83,7 +84,7 @@ const Projectusers =()=>{
                 gambarproject,
                 iduser:id,
                 deleted:0,
-                datepost:moment().format('MMMM Do YYYY, h:mm:ss a')
+                datepost:myDate
             }
               formdata.append('image',addimagefile.addImageFile)
               formdata.append('data',JSON.stringify(data))

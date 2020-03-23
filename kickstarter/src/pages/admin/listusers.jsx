@@ -79,8 +79,8 @@ const Listusers=()=>{
                             <div>{index+1}. </div>
                             <div className='list-box-content'>Username : {val.username}</div>
                             <div className='list-box-content'>Email : {val.email}</div>
-                            <div className='list-box-content'>Role : {val.email==='1'?'admin':'user'}</div>
-                            <div className='list-box-content'>Last Login : {val.lastlogin}</div>
+                            <div className='list-box-content'>Role : {val.role==='1'?'admin':'user'}</div>
+                            <div className='list-box-content'>Created : {val.created}</div>
                             <div className='d-flex flex-row' style={{marginTop:'10px',marginBottom:'15px', marginLeft:'auto', marginRight:'7px'}}>
                             <Button onClick={()=>onClickButtonDelete(val.id)}variant="contained" color="secondary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>DELETE</Button>
                             </div>

@@ -1,6 +1,7 @@
 const encryptpassword = require('../helper/encrypt')
 const {mysqldb} = require('../connection')
 const transporter = require('../helper/mailer')
+const moment = require('moment')
 
 
 module.exports={
@@ -10,6 +11,7 @@ module.exports={
         // req.body.username
         // req.body.password
         var sql = `select username,email from users where username='${username}' or email='${email}'`
+        var myDate =  moment().format("YYYY-MM-DD HH:mm:ss")
 
         mysqldb.query(sql,(err,result)=>{
             if(err){
@@ -27,7 +29,7 @@ module.exports={
                     email,
                     status:0,
                     role:2,
-                    lastlogin:'1-1-1970'
+                    created:myDate
                 }
                 sql = `insert into users set ?`
                 mysqldb.query(sql, data, (err1,res1)=>{

@@ -116,7 +116,7 @@ module.exports={
     getProjectDetail:(req,res)=>{
         console.log(req.params, 'apramsdetail')
         let {id} = req.params
-        var sql = `select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.id=${id} and deleted=0;`
+        var sql = `select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.id=${id} and ps.deleted=0;`
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err})
             console.log(result, 'result')
@@ -124,7 +124,7 @@ module.exports={
         })
     },
     getProjectRecommended:(req,res)=>{
-        var sqlcount=`select count(*) as count from projectusers`
+        var sqlcount=`select count(*) as count from projectusers where deleted=0`
 
         let dataCount
         mysqldb.query(sqlcount, (err1,result1)=>{

@@ -9,6 +9,7 @@ import { APIURL, APIURLimage } from '../../helper/apiurl';
 import Axios from 'axios'
 import { CustomInput } from 'reactstrap';
 import CurrencyTextField from '@unicef/material-ui-currency-textfield'
+import moment from 'moment'
 
 const ProjectDetails=(props)=>{
     const dispatch = useDispatch()
@@ -94,13 +95,13 @@ const ProjectDetails=(props)=>{
 
       const onSaveClick=()=>{
         var formdata = new FormData()
-
+        var myDate =  moment().format("YYYY-MM-DD HH:mm:ss")
         var data = {
             idproject:id,
             iddonatur:idlogin,
             jumlahdonasi:value,
             confirm:0,
-            tanggaldonasi:Hari(),
+            datedonate:myDate
         }
 
         // console.log(data)
