@@ -63,7 +63,7 @@ const MyProject =()=>{
                     <div className='mt-3' style={{textAlign:'left', fontSize:'15px', fontWeight:'500', color:'green'}}>Funded : {parseInt(val.percentdonate)} %</div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'13px', fontWeight:'500'}}>Category : {val.categoryproject}</div>
                     <div style={{justifyContent:'center', maxWidth:'600px'}}>    
-                    <Button variant="contained" color="secondary" style={{marginTop:'50px'}} onClick={()=>toggleModal(index)}>Edit This Project</Button>
+                    <Button variant="contained" color="secondary" style={{marginTop:'11px'}} onClick={()=>toggleModal(index)}>Edit This Project</Button>
                     </div>
                 </div>
             </div>

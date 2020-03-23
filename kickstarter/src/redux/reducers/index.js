@@ -4,6 +4,7 @@ import AuthenticationReducers from './AuthenticationReducers'
 import DataProjectReducers from './DataProjectReducers'
 import Loading from './LoadingReducers'
 import Redirect from './RedirectReducers'
+import Admin from './adminReducers'
 
 
 export default combineReducers({
@@ -11,7 +12,8 @@ export default combineReducers({
     auth:AuthenticationReducers,
     DataProjectReducers:DataProjectReducers,
     Loading:Loading,
-    Redirect:Redirect
+    Redirect:Redirect,
+    admin:Admin
 
 })
 

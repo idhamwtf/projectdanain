@@ -5,7 +5,7 @@ import Headercategory from './components/headercategory'
 import Homepage from './components/homepage'
 import Footer from './components/footer'
 import Login from './pages/users/login';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Register from './pages/users/register'
 import Admin from './pages/admin/admin'
 import Verified from './pages/users/verified';
@@ -15,7 +15,7 @@ import { APIURL } from './helper/apiurl';
 import { reLogin } from './redux/actions';
 import {useDispatch, useSelector} from 'react-redux'
 import MyProject from './pages/users/myproject'
-import {dataProject} from './redux/actions'
+import {dataProject, getbukti} from './redux/actions'
 import ProjectDetails from './pages/users/projectdetails'
 
 function App() {
@@ -32,10 +32,18 @@ function App() {
         dispatch(reLogin(res.data))
       })
       dispatch(dataProject(id))
+      // dispatch(getbukti())
     }
     setloading(false)
-
   },[])
+
+  useEffect(()=>{
+    dispatch(dataProject(id))
+    dispatch(getbukti())
+  })
+
+  console.log(role)
+
 
   if(loading){
     return(
@@ -60,6 +68,9 @@ function App() {
       <Footer/>
     </div>
   );
+  
+  
 }
+
 
 export default App;

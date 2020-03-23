@@ -1,0 +1,291 @@
+
+/*
+=====
+DEPENDENCES
+=====
+*/
+
+.r-list{
+    --uirListPaddingLeft: var(--rListPaddingLeft, 0);
+    --uirListMarginTop: var(--rListMarginTop, 0);
+    --uirListMarginBottom: var(--rListMarginBottom, 0);
+    --uirListListStyle: var(--rListListStyle, none);
+  
+    padding-left: var(--uirListPaddingLeft) !important;
+    margin-top: var(--uirListMarginTop) !important;
+    margin-bottom: var(--uirListMarginBottom) !important;
+    list-style: var(--uirListListStyle) !important;
+  }
+  
+  .r-link{
+    --uirLinkDisplay: var(--rLinkDisplay, inline-flex);
+    --uirLinkTextColor: var(--rLinkTextColor);
+    --uirLinkTextDecoration: var(--rLinkTextDecoration, none);
+    display: var(--uirLinkDisplay) !important;
+    color: var(--uirLinkTextColor) !important;
+    text-decoration: var(--uirLinkTextDecoration) !important;
+  }
+  
+  /*
+  =====
+  COMPONENT
+  =====
+  */
+  
+  .pagination{
+    --uiPaginationDisplay: var(--paginationDisplay, flex);
+    --uiPaginationAlignmentX: var(--paginationAlignmentX, flex-start);
+    --uiPaginationAlignmentY: var(--paginationAlignmentY, center);
+  
+    --uiPaginationGroupMargin: var(--paginationGroupMargin, .25em);
+    --uiPaginationPointPadding: var(--paginationPointPadding, .5875em .8em);  
+    
+    display: var(--uiPaginationDisplay);
+    flex-wrap: wrap;
+    align-items: var(--uiPaginationAlignmentY);
+    justify-content: var(--uiPaginationAlignmentX);  
+  }
+  
+  .pagination__list{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: var(--uiPaginationAlignmentY);
+    justify-content: var(--uiPaginationAlignmentX);  
+  }
+  
+  .pagination__group:nth-child(n+2){
+    margin-left: var(--uiPaginationGroupMargin);
+  }
+  
+  .pagination__point{
+    padding: var(--uiPaginationPointPadding);
+    line-height: 1;  
+  }
+  
+  /*
+  =====
+  SKIN
+  =====
+  */
+  .pagination{
+    --uiPaginationPointBorderRadius: var(--paginationPointBorderRadius);
+    --uiPaginationPointBgColor: var(--paginationPointBgColor);
+    --uiPaginationPointBorderWidth: var(--paginationPointBorderWidth);
+    --uiPaginationPointBorderColor: var(--paginationPointBorderColor);
+    --uiPaginationPointFontWeight: var(--paginationPointFontWeight);
+    --uiPaginationPointTextColor: var(--paginationPointTextColor);  
+    
+    --rLinkTextColor: var(--paginationPointTextColor);
+    
+    --uiPaginationActivePointTextColor: var(--paginationActivePointTextColor);  
+    --uiPaginationActivePointFontWeight: var(--paginationActivePointFontWeight, 700);
+    --uiPaginationActivePointBgColor: var(--paginationActivePointBgColor);
+    --uiPaginationActivePointBorderWidth: var(--paginationActivePointBorderWidth, 0);
+    --uiPaginationActivePointBorderColor: var(--paginationActivePointBorderColor, transparent);  
+  
+    --uiPaginationArrowSize: var(--paginationArrowSize, 22px);
+    --uiPaginationArrowMargin: var(--paginationArrowMargin, .25em);
+    --uiPaginationArrowDisplay: var(--paginationArrowDisplay, inline-flex);  
+  }
+  
+  .pagination__point{
+    background-color: var(--uiPaginationPointBgColor);
+    border: var(--uiPaginationPointBorderWidth) solid var(--uiPaginationPointBorderColor);
+    border-radius: var(--uiPaginationPointBorderRadius);  
+  
+    font-weight: var(--uiPaginationPointFontWeight);
+    color: var(--uiPaginationPointTextColor);    
+  }
+  
+  span.pagination__point{
+    --uiPaginationPointBgColor: var(--uiPaginationActivePointBgColor);
+    --uiPaginationPointBorderWidth: var(--uiPaginationActivePointBorderWidth);
+    --uiPaginationPointBorderColor: var(--uiPaginationActivePointBorderColor);
+    --uiPaginationPointFontWeight: var(--uiPaginationActivePointFontWeight);
+    --uiPaginationPointTextColor: var(--uiPaginationActivePointTextColor);
+    
+    display: inline-flex;  
+  }
+  
+  .pagination__control{
+    position: relative;
+    align-items: center;
+  }
+  
+  .pagination__control::before, 
+  .pagination__control::after{
+    display: var(--uiPaginationArrowDisplay);
+    height: 1em;
+    font-size: var(--uiPaginationArrowSize);
+    line-height: 1;
+  }
+  
+  .pagination__control_prev{
+    margin-right: var(--uiPaginationControlMargin);
+  }
+  
+  .pagination__control_prev::before{
+    content: "←";
+    margin-right: var(--uiPaginationArrowMargin);
+  }
+  
+  .pagination__control_next{
+    margin-left: var(--uiPaginationControlMargin);
+  }
+  
+  .pagination__control_next::after{
+    content: "→";
+    margin-left: var(--uiPaginationArrowMargin);
+  }
+  
+  /*
+  =====
+  SETTINGS
+  =====
+  */
+  
+  :root{
+    --paginationFontSize: 1.6rem;
+    --paginationActivePointBgColor: rgba(0, 0, 0, .3);
+    --paginationPointTextColor: #fff;
+    --paginationActivePointTextColor: #fff;
+  }
+  
+  .section:nth-of-type(2),
+  .section:nth-of-type(4){
+    --paginationActivePointBgColor: transparent;
+    --paginationActivePointBorderColor: rgba(0, 0, 0, .3);
+    --paginationActivePointBorderWidth: 2px;
+  }
+  
+  .section:nth-of-type(3),
+  .section:nth-of-type(4){
+    --paginationPointBorderRadius: 50%;
+  }
+  
+  .section:nth-of-type(1) .demo:nth-of-type(3n+2),
+  .section:nth-of-type(3) .demo:nth-of-type(3n+2){
+    --paginationPointTextColor: #4557bb;
+    --paginationActivePointBgColor: #4557bb;
+  }
+  
+  .section:nth-of-type(2) .demo:nth-of-type(3n+2),
+  .section:nth-of-type(4) .demo:nth-of-type(3n+2){
+    --paginationPointTextColor: #4557bb;
+    --paginationActivePointTextColor: #222;
+    --paginationActivePointBorderColor: #4557bb;
+  }
+  
+  .demo:nth-of-type(4),
+  .demo:nth-of-type(5),
+  .demo:nth-of-type(6){
+    --paginationAlignmentX: center;  
+  }
+  
+  .demo:nth-of-type(7),
+  .demo:nth-of-type(8),
+  .demo:nth-of-type(9){
+    --paginationAlignmentX: flex-end;  
+  }
+  
+  
+/*   
+  =====
+  DEMO
+  =====
+  */
+  
+  @media (min-width: 768px){
+  
+    /* html{
+      font-size: 62.5%;
+    } */
+  }
+  
+  @media (max-width: 767px){
+  
+    /* html{
+      font-size: 50%;
+    } */
+  }
+  
+  body{
+    margin: 0;
+    /* padding-top: 5rem; */
+    /* padding-bottom: 5rem;   */
+  
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
+    /* font-size: 1.6rem; */
+  
+    /* -webkit-overflow-scrolling: touch;    */
+    /* overflow-y: scroll; */
+    background-color: #f0f0f0;
+  }
+  
+  .section:nth-of-type(n+2){
+    margin-top: 6rem;
+  }
+  
+  .section__label{
+    display: flex;
+    align-items: center; 
+    padding-left: 3rem;
+    font-weight: 700;
+  }
+  
+  .section__label::before{
+    content: "";
+    width: 6rem;
+    height: 2px;
+    background-color: #4557bb;
+    margin-top: .5rem;
+    margin-right: 1rem;
+  }
+  
+  .demo{
+    box-sizing: border-box;
+    position: relative;
+    padding: 5rem 3rem;
+    background-color: white;
+  }
+  
+  .demo:nth-of-type(3n+2){
+    background-color: #fefefe;
+  }
+  
+  .demo:nth-of-type(3n+3){
+    background-color: #6c5ce7;
+  }
+  
+  @media (max-width: 960px){
+  
+    .demo{
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .demo:nth-child(n+2){
+      margin-top: 5rem;
+    }
+  }
+  
+  @media (min-width: 961px){
+    
+    .section{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 50px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    
+    .section__label{
+      grid-column: span 3;
+    }
+    
+    .demo{
+      border-radius: 10px;
+      color: blue;
+    }
+  }

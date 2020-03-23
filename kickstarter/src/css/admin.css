@@ -1,7 +1,7 @@
 .admin{
     /* border: 1px silver solid; */
     max-height: 100vh;
-    color: white;
+    color: #01579b;
     font-weight: 700;
 }
 
@@ -14,7 +14,7 @@
     /* border: 1px red solid; */
     min-height: 90vh;
     background-color:'#05ce78' !important;
-    color: #05ce78;
+    color: #01579b;
 }
 
 .isi-dashboard{
@@ -24,5 +24,17 @@
     text-align: center;
     padding-top: 6px;
     /* background-color: #69f0ae; */
-    color:#1b5e20;
+    color:#01579b;
+}
+
+.box-list>div{
+    max-width: 430px;
+    margin-top: 15px;
+    /* border: 1px solid black !important; */
+    /* width: 400px; */
+}
+
+.list-box-content{
+    width: 250px;
+    justify-content: center;
 }

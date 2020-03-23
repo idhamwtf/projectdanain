@@ -12,7 +12,7 @@ export default function Headeradmin(){
     const Logoutuser=()=>{
         localStorage.removeItem('id')
         localStorage.removeItem('username')
-        dispatch(Logoutaction)
+        dispatch(Logoutaction())
     }
     
     return (
@@ -27,7 +27,7 @@ export default function Headeradmin(){
                 {/* <div style={{}} className='header-kanan-admin'>
                     Logout
                 </div> */}
-                <Link to='/' onClick={Logoutuser}><div className=' header-kanan-admin my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Logout</span></div></Link>
+                <Link to='/' style={{textDecoration:'none', color:'#01579b', marginTop:'8px'}} onClick={Logoutuser}><div className=' header-kanan-admin my-3 mx-4'><span>Logout</span></div></Link>
             </div>
         </div>
     )

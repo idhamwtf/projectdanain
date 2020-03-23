@@ -4,7 +4,7 @@ const INITIAL_STATE={
     username:'',
     password:'',
     email:'',
-    role:'',
+    role:0,
     error:'',
     loginerror:"",
     login:false,
@@ -26,10 +26,11 @@ export default (state=INITIAL_STATE, action)=>{
         case 'REGIS_LOADING':
             return {...state,loading:true,error:''}
         case USER_LOGIN_SUCCESS:
-            console.log(action.payload)
+            // console.log(action.payload)
             return {...state,...action.payload, authchecked:true,loginstatus:true }
-        case USER_LOGOUT:
-            return {...INITIAL_STATE}
+        case `USER_LOGOUT`:
+            console.log(`asuuu`)
+            return INITIAL_STATE
         case AUTH_LOADING:
             return {...state,error:"",loading:true}
         case AUTH_SYSTEM_ERROR:

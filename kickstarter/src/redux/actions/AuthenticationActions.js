@@ -53,15 +53,27 @@ export const loginAction = (username, password)=>{
 }
 
 export const reLogin=(res)=>{
-    console.log(res)
+    // console.log(res)
     return dispatch =>{
         dispatch({type:USER_LOGIN_SUCCESS, payload:res})
     }
 }
 
 export const Logoutaction=()=>{
-return dispatch =>{
-    dispatch({type:USER_LOGOUT})
-    dispatch({type:'REDIRECT'})
+    // return {
+    //     type: USER_LOGOUT
+    // }
+    console.log('masuklogout')
+    return dispatch =>{
+        dispatch({type:`USER_LOGOUT`})
+        dispatch({type:'FALSEREDIRECT'})
+    }
+        
 }
-}
+
+
+// export const testasu=()=>{
+//     return {
+//         type : `USER_LOGOUT`
+//     }
+// }

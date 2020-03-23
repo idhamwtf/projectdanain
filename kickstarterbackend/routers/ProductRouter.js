@@ -8,5 +8,6 @@ router.get('/getproject', ProductController.getProject)
 router.get('/getprojectuser/:id', ProductController.getProjectUser)
 router.get('/getfeatured', ProductController.getFeatured)
 router.get('/projectdetail/:id', ProductController.getProjectDetail)
+router.get('/getrecommend/:page', ProductController.getProjectRecommended)
 
 module.exports=router

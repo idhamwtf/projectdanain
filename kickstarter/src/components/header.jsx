@@ -5,7 +5,7 @@ import {Link, Redirect} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Headeradmin from './headeradmin'
-import {Logoutaction} from './../redux/actions'
+import {Logoutaction, testasu} from './../redux/actions'
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Dropdown } from "reactstrap";
 
 function Header (){
@@ -20,14 +20,19 @@ function Header (){
     const toggleAccount = () => setDropdownOpen(prevState => !prevState);
 
 
-   
+    useEffect(()=>{
+
+    },[])
 
 
     const Logoutuser=()=>{
+        dispatch(Logoutaction())
+        // dispatch(testasu())
         localStorage.removeItem('id')
         localStorage.removeItem('username')
-        dispatch(Logoutaction)
     }
+
+    console.log(loginstatus,'12312312')
       
     if(role==='1'){
         return(
@@ -56,16 +61,8 @@ function Header (){
                     <div className='mt-3 mx-2'>Search</div>
                     <div className='mt-3 mr-3'><SearchIcon/></div>
                     {
-                        loginstatus===false?
-                        <div className='d-flex flex-row'>
-                        <Link to='/register' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Register</span></div></Link>
-                        <Link to='/login' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Login</span></div></Link>
-                        </div>
-                        :
-                        null
-                    }
-                    {
-                        loginstatus===true?
+                        loginstatus
+                        ?
                         <div className='d-flex flex-row'>
                         {/* <Link to='/' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Hello, {username}</span></div></Link>
                         <Link to='/myproject' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>My Project</span></div></Link>
@@ -86,22 +83,49 @@ function Header (){
                             </DropdownItem> */}
                             <DropdownItem divider />
                             <DropdownItem>
+                            </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                        <Link to='/' style={{textDecoration:'none', color:'black'}} onClick={Logoutuser}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Logout</span></div></Link>
+                        </div>
+                        :
+                        <div className='d-flex flex-row'>
+                        <Link to='/register' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Register</span></div></Link>
+                        <Link to='/login' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Login</span></div></Link>
+                        </div>
+                    }
+                    
+                    {/* {
+                        loginstatus===true?
+                        <div className='d-flex flex-row'>
+                        <Dropdown style={{textDecoration:'none', marginTop:'7px'}} isOpen={dropdownOpen} toggle={toggleAccount}>
+                            <DropdownToggle nav style={{color:'black'}}>
+                            Hello, {username} <ArrowDropDownIcon style={{marginBottom:'2px'}} />
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                            <DropdownItem style={{ marginBottom: '10px' }}>
+                            <Link to='/myproject' style={{textDecoration:'none', color:'black'}}>My Project</Link>
+                            </DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem>
                                 <Link to='/' style={{textDecoration:'none', color:'black'}} onClick={Logoutuser}>Logout</Link >
                             </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                         </div>
                         :
-                        null
-                    }
+                        <div>asdasd</div>
+                    } */}
                 </div>
             </div>
             
         </div>
         
-    )
+        )
+    
     
 }
+
 
 
 export default Header;

@@ -9,15 +9,14 @@ module.exports={
 
         // req.body.username
         // req.body.password
-        
-
-        var sql = `select username from users where username='${username}' and email='${email}'`
+        var sql = `select username,email from users where username='${username}' or email='${email}'`
 
         mysqldb.query(sql,(err,result)=>{
             if(err){
                 return res.status(500).send({status:'error', err})
             }
             if(result.length>0){
+                console.log(result,'gagal')
                 return res.status(200).send({status:'error', message: 'username/email has been taken'})
             }else{
                 var hashpassword = encryptpassword(password)

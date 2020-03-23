@@ -1,6 +1,7 @@
 const {mysqldb} = require('./../connection/index')
 const fs = require('fs')
 const {uploader} = require('./../helper/uploader')
+const paginate = require('jw-paginate')
 
 module.exports={
     postProject:(req,res)=>{
@@ -121,5 +122,34 @@ module.exports={
             console.log(result, 'result')
             return res.status(200).send(result)
         })
+    },
+    getProjectRecommended:(req,res)=>{
+        var sqlcount=`select count(*) as count from projectusers`
+
+        let dataCount
+        mysqldb.query(sqlcount, (err1,result1)=>{
+        if(err1) res.status(500).send({message:error})
+        dataCount = result1[0].count
+        //trigger pindah page
+        // console.log(dataCount)
+        const page = parseInt(req.params.page) || 1
+        const pageSize = 3;
+        const pager = paginate(dataCount, page, pageSize)
+        
+        //untuk limit database
+        let offset
+        if(page === 1){
+            offset=0
+        }else{
+            offset=pageSize*(page -1)
+        }
+        // console.log(req.params.page)
+        var sql=`select ps.*,u.username,sum(case when d.confirm!=0 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.deleted=0 group by ps.id limit ? offset ?;`
+        mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{
+            if(err2) res.status(500).send({message:err2})
+            const pageOfdata = result2
+            return res.status(200).send({pageOfdata, pager})
+        })
+         })
     }
 }

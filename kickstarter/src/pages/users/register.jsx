@@ -48,9 +48,9 @@ function Register() {
         
     }
 
-    if(register){
-      return <Redirect to={'/login'}/>
-    }
+    // if(register){
+    //   return <Redirect to={'/login'}/>
+    // }
   return (
       <div className='register'>
         <form className={classes.root}  noValidate autoComplete="off">
