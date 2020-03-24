@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import {APIURL} from './../../helper/apiurl'
-import {USER_LOGIN_SUCCESS, USER_LOGOUT, AUTH_LOADING, AUTH_LOGIN_ERROR, AUTH_REGISTER, AUTH_SYSTEM_ERROR, AUTH_REGISTER_ERROR} from './../actions/types'
+import {USER_LOGIN_SUCCESS,AUTH_LOADING, AUTH_LOGIN_ERROR} from './../actions/types'
 
 export const LogoutSuccessAction=()=>{
     return{
@@ -53,7 +53,7 @@ export const loginAction = (username, password)=>{
 }
 
 export const reLogin=(res)=>{
-    // console.log(res)
+    console.log(res,'resrelogin')
     return dispatch =>{
         dispatch({type:USER_LOGIN_SUCCESS, payload:res})
     }

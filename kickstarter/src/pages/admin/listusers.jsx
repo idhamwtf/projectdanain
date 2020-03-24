@@ -1,17 +1,18 @@
 import React from 'react';
 import '../../css/admin.css'
-import MaterialTable from 'material-table';
+// import MaterialTable from 'material-table';
 import { useEffect } from 'react';
-import {useSelector, useDispatch} from 'react-redux'
-import { changeHeaderAction, changeFooterAction, loginAction} from '../../redux/actions'
+import {useDispatch} from 'react-redux'
+import {changeFooterAction} from '../../redux/actions'
 import { Button, Link } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+// import VisibilityIcon from '@material-ui/icons/Visibility';
 import { useState } from 'react';
 // import {dataProject, getbukti} from './redux/actions'
 import Axios from 'axios';
-import { APIURL, APIURLimage } from '../../helper/apiurl';
+import { APIURL} from '../../helper/apiurl';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import { Table } from 'reactstrap';
 
 const Listusers=()=>{
     const dispatch = useDispatch()
@@ -19,7 +20,7 @@ const Listusers=()=>{
     const [page,setPage]=useState(1)
     const [pager,setpager]=useState({})
     const [datausers,setdatausers]=useState([])
-    const [list,setlist]=useState('')
+    // const [list,setlist]=useState('')
     const [proof,setproof]=useState(false)
     const [linkgambar,setlinkgambar]=useState('')
     const [update,setupdate]=useState(true)
@@ -69,6 +70,33 @@ const Listusers=()=>{
 
 
         // console.log(datausers)
+        const renderListUsersTable=()=>{
+            return datausers.map((val,index)=>{
+                if(page===1){
+                    return(
+                        <tr key={index}>
+                        <td>{index+1}</td>
+                        <td>{val.username}</td>
+                        <td>{val.email}</td>
+                        <td>{val.role==='1'?'admin':'user'}</td>
+                        <td>{val.created}</td>
+                        <td><Button onClick={()=>onClickButtonDelete(val.id)}variant="contained" color="secondary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>DELETE</Button></td>
+                    </tr>
+                    )
+                }else{
+                    return(
+                    <tr key={index}>
+                        <td>{(index+1*(page+10))-1}</td>
+                        <td>{val.username}</td>
+                        <td>{val.email}</td>
+                        <td>{val.role==='1'?'admin':'user'}</td>
+                        <td>{val.created}</td>
+                        <td><Button onClick={()=>onClickButtonDelete(val.id)}variant="contained" color="secondary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>DELETE</Button></td>
+                    </tr>
+                )
+                }
+            })
+        }
 
         const renderListUsers=()=>{
             console.log(datausers)
@@ -101,7 +129,24 @@ const Listusers=()=>{
           }
            <div className='d-flex flex-row admin-dashboard'>
                <div className='box-admin' style={{width:'100%', backgroundColor:'#e8eaf6', color:'black'}}>
-                      {renderListUsers()}   
+                    {/* start */}
+                      {/* {renderListUsers()} */}
+                      <Table striped>
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Created</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {renderListUsersTable()}
+                        </tbody>
+                      </Table>
+                    {/* ends    */}
                     <div style={{ marginLeft: '25%', width: '350px' }}>
                     {pager.pages && pager.pages.length &&
                     <ul className="pagination">

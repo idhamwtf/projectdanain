@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import '../css/header.css';
 import SearchIcon from '@material-ui/icons/Search';
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Headeradmin from './headeradmin'
-import {Logoutaction, testasu} from './../redux/actions'
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Dropdown } from "reactstrap";
+import {Logoutaction} from './../redux/actions'
+import {DropdownToggle, DropdownMenu, DropdownItem, Dropdown } from "reactstrap";
 
 function Header (){
-    const [loading,setloading] = useState(true)
+    // const [loading,setloading] = useState(true)
 
-    const {username,id,role,loginstatus} = useSelector(state=>state.auth)
+    const {username,role,loginstatus} = useSelector(state=>state.auth)
 
     const dispatch = useDispatch()
 
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggleAccount = () => setDropdownOpen(prevState => !prevState);
 
@@ -32,7 +32,7 @@ function Header (){
         localStorage.removeItem('username')
     }
 
-    console.log(loginstatus,'12312312')
+    // console.log(loginstatus,'12312312')
       
     if(role==='1'){
         return(

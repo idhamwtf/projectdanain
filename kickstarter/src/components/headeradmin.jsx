@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/headeradmin.css'
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {Logoutaction} from './../redux/actions'
 import {Link} from 'react-router-dom'
 

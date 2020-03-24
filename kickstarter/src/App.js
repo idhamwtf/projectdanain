@@ -5,7 +5,7 @@ import Headercategory from './components/headercategory'
 import Homepage from './components/homepage'
 import Footer from './components/footer'
 import Login from './pages/users/login';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Register from './pages/users/register'
 import Admin from './pages/admin/admin'
 import Verified from './pages/users/verified';
@@ -20,8 +20,9 @@ import ProjectDetails from './pages/users/projectdetails'
 
 function App() {
   const dispatch = useDispatch()
-  const {username,id,role} = useSelector(state=>state.auth)
-  const [loading,setloading] = useState(true)
+  const {id,role,loading} = useSelector(state=>state.auth)
+  const [loadinglocal,setloadinglocal] = useState(true)
+  const [refresh,setrefresh]=useState(true)
 
   useEffect(()=>{
     var id = localStorage.getItem('id')
@@ -31,21 +32,22 @@ function App() {
       .then((res)=>{
         dispatch(reLogin(res.data))
       })
-      dispatch(dataProject(id))
+      // dispatch(dataProject(id))
       // dispatch(getbukti())
     }
-    setloading(false)
+    setloadinglocal(false)
   },[])
 
   useEffect(()=>{
-    dispatch(dataProject(id))
+    // dispatch(dataProject(id))
     dispatch(getbukti())
+    // setrefresh(false)
   })
 
-  console.log(role)
+  // console.log(role)
 
-
-  if(loading){
+  console.log(loading)
+  if(loading && loadinglocal){
     return(
       <div>Loading...</div>
     )

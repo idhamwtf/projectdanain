@@ -1,8 +1,8 @@
 import React, {useEffect, createRef, useState}from 'react';
 import '../../css/projectusers.css'
 import {useSelector, useDispatch} from 'react-redux'
-import { changeHeaderAction, changeFooterAction, UserRegister, UserAddProject} from '../../redux/actions'
-import { makeStyles } from '@material-ui/core/styles';
+import { changeHeaderAction} from '../../redux/actions'
+// import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { CustomInput } from 'reactstrap';
@@ -17,15 +17,15 @@ import moment from 'moment'
 
 const Projectusers =()=>{
 
-    const [project,setproject] = useState({})
+    // const [project,setproject] = useState({})
     const [addimagefile,setimageadd]=useState({
         addImageFileName:'Select your Image',
         addImageFile:undefined,
       })
 
-    const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
+    // const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
     const dispatch = useDispatch()
-    const {username,id,role} = useSelector(state=>state.auth)
+    const {id} = useSelector(state=>state.auth)
 
         useEffect(()=>{
             dispatch(changeHeaderAction(1))
@@ -34,22 +34,11 @@ const Projectusers =()=>{
         },[])
         console.log(id)
 
-        const Hari=(a='')=>{
-            let newDate = new Date()
-            let date = newDate.getDate();
-            let month = newDate.getMonth() + 1;
-            let year = newDate.getFullYear();
-            return `${year}${a}${month<10?`0${month}`:`${month}`}${a}${date}`
-         }
-
-
-
       let namaproject = createRef()
       let gambarproject = createRef() 
       let shortdescproject = createRef()
       let aboutproject = createRef()
       let targetuang = createRef() 
-      let targetwaktu = createRef()
       let categoryproject = createRef()
 
       const onAddImageFileChange=(event)=>{
@@ -104,19 +93,18 @@ const Projectusers =()=>{
             })
             
       }
-      console.log(Hari())
   
       return (
     <div className='projectadduser'>
         <center>
             <div style={{fontSize:'34px', fontWeight:'200', marginRight:'2%', marginTop:'5px'}}>Start your project</div>
             <div className='d-flex flex-column' style={{ width:'35%', height:'100%'}}>
-                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Name" className='m-2' inputRef={namaproject} />
-                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="What is your project ?" className='m-2' inputRef={shortdescproject} />
-                {/* <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Image" className='m-2'  inputRef={gambarproject}/> */}
-                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Money Goal" className='m-2' inputRef={targetuang} />
-                <TextField className='inputporjectusers' style={{width:'98%', marginTop:'5px'}}    id="standard-basic" label="Category" className='m-2' inputRef={categoryproject} />
-                <CustomInput className='inputporjectusers' style={{width:'98%', marginTop:'10px'}} type='file' label={addimagefile.addImageFileName} id='addImagePost' className='form-control' 
+                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Name" inputRef={namaproject} />
+                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="What is your project ?" inputRef={shortdescproject} />
+                {/* <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Image"  inputRef={gambarproject}/> */}
+                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Money Goal" inputRef={targetuang} />
+                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}}    id="standard-basic" label="Category" inputRef={categoryproject} />
+                <CustomInput className='form-control inputporjectusers m-2' style={{width:'98%', marginTop:'10px'}} type='file' label={addimagefile.addImageFileName} id='addImagePost' 
                 onChange={onAddImageFileChange}
                  />
                 <TextField

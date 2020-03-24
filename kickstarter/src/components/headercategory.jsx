@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../css/headercategory.css';
 import {useSelector} from 'react-redux'
 
@@ -7,7 +7,7 @@ function Headercategory(){
 
     const { header } = useSelector(state=>state.HeaderFooter)
     // const [role,setrole] = useState('user')
-    const {username,id,role} = useSelector(state=>state.auth)
+    const {role} = useSelector(state=>state.auth)
     // console.log('stateheader', header)
 
     if(header===1 || role==='1'){

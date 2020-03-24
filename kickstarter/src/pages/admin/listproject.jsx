@@ -1,11 +1,11 @@
 import React from 'react';
 import '../../css/admin.css'
-import MaterialTable from 'material-table';
+// import MaterialTable from 'material-table';
 import { useEffect } from 'react';
-import {useSelector, useDispatch} from 'react-redux'
-import { changeHeaderAction, changeFooterAction, loginAction} from '../../redux/actions'
+import {useDispatch} from 'react-redux'
+// import { changeHeaderAction, changeFooterAction, loginAction} from '../../redux/actions'
 import { Button, Link } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+// import VisibilityIcon from '@material-ui/icons/Visibility';
 import { useState } from 'react';
 // import {dataProject, getbukti} from './redux/actions'
 import Axios from 'axios';
@@ -17,12 +17,12 @@ import 'react-image-lightbox/style.css';
 const ListBayar=()=>{
 
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
   const [page,setPage]=useState(1)
   const [pager,setpager]=useState({})
   const [dataproject,setdataproject]=useState([])
-  const [list,setlist]=useState('')
+//   const [list,setlist]=useState('')
   const [proof,setproof]=useState(false)
   const [linkgambar,setlinkgambar]=useState('')
   const [update,setupdate]=useState(true)
@@ -89,7 +89,7 @@ const ListBayar=()=>{
                         <div style={{marginBottom:'1px'}}>Short Desc : {val.shortdescproject}</div>
                         <div style={{marginBottom:'1px'}}>Category : {val.categoryproject}</div>
                         <div style={{marginBottom:'1px', color:'green'}}>Target : {val.targetuang}</div>
-                        <div style={{marginBottom:'1px', color:'green'}}>Funded : {val.percentdonate}%</div>
+                        <div style={{marginBottom:'1px', color:'green'}}>Funded : {parseInt(val.percentdonate)}%</div>
                         <div style={{marginBottom:'1px',fontWeight:'500'}}>By user : {val.username}</div>
                         <div style={{marginBottom:'1px',fontWeight:'400'}}>Tanggal post : {val.datepost}</div>
                     </div>

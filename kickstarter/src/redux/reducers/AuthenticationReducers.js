@@ -8,7 +8,7 @@ const INITIAL_STATE={
     error:'',
     loginerror:"",
     login:false,
-    loading:false,
+    loading:true,
     register:false,
     authchecked:false,
     loginstatus:false
@@ -27,7 +27,7 @@ export default (state=INITIAL_STATE, action)=>{
             return {...state,loading:true,error:''}
         case USER_LOGIN_SUCCESS:
             // console.log(action.payload)
-            return {...state,...action.payload, authchecked:true,loginstatus:true }
+            return {...state,...action.payload, authchecked:true,loginstatus:true,loading:false }
         case `USER_LOGOUT`:
             console.log(`asuuu`)
             return INITIAL_STATE

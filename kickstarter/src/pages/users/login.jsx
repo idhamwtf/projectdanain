@@ -26,7 +26,7 @@ function Login() {
     let passwordref = createRef() 
 
     
-    const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
+    // const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
     const redirect = useSelector(state=>state.Redirect)
     const dispatch = useDispatch()
     

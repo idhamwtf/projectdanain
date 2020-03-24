@@ -75,7 +75,7 @@ module.exports={
         
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err})
-            console.log(result)
+            // console.log(result)
             return res.status(200).send(result)
         })
     },
@@ -84,7 +84,7 @@ module.exports={
         
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err})
-            console.log(result)
+            // console.log(result)
             return res.status(200).send(result)
         })
     },
@@ -95,7 +95,7 @@ module.exports={
         if(err1) res.status(500).send({message:error})
         dataCount = result1[0].count
         //trigger pindah page
-        console.log(dataCount)
+        // console.log(dataCount)
         const page = parseInt(req.params.page) || 1
         const pageSize = 10;
         const pager = paginate(dataCount, page, pageSize)
@@ -121,7 +121,7 @@ module.exports={
         var sql = `UPDATE projectusers SET deleted = 1 WHERE id = ${req.params.id};`
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err})
-            console.log(result)
+            // console.log(result)
             return res.status(200).send(result)
         })
     },
@@ -159,7 +159,7 @@ module.exports={
         var sql = `update users set deleted = 1 where id=${req.params.id}`
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err})
-            console.log(result)
+            // console.log(result)
             return res.status(200).send(result)
         })
     }

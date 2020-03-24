@@ -5,11 +5,9 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import Axios from 'axios';
 import { APIURL, APIURLimage } from '../helper/apiurl';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
 // import './../css/pagination.css'
-
-
 
 function Jumbotron1(){
 
@@ -194,7 +192,7 @@ function Jumbotron1(){
                             </div>
                         </div>
                     </div> */}
-                    <div style={{ marginLeft: '25%', width: '350px' }}>
+                    <div style={{ marginLeft: '14%', width: '350px', marginTop:'50px' }}>
                  {pager.pages && pager.pages.length &&
                 <ul className="pagination">
                     <li className={`page-item first-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>

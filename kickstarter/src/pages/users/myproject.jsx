@@ -1,19 +1,26 @@
 import React, {useEffect,useState} from 'react';
 import Progressbar from '../../components/progressbar'
 import {useSelector, useDispatch} from 'react-redux'
-import {changeHeaderAction, changeFooterAction, dataProject} from './../../redux/actions'
-import Axios from 'axios';
-import { APIURL,APIURLimage } from '../../helper/apiurl';
+import {changeHeaderAction, dataProject} from './../../redux/actions'
+// import Axios from 'axios';
+import { APIURLimage,APIURL } from '../../helper/apiurl';
 import './../../css/myproject.css'
 import Button from '@material-ui/core/Button'
 import Modal from './../../components/modal'
 import { Link } from 'react-router-dom';
+import NumberFormat from 'react-number-format'
+import Axios from 'axios';
+
 
 // style={{height:'60%', width:'75%', margin:'15px 10%'}} 
 const MyProject =()=>{
 
-    const {username,id,role} = useSelector(state=>state.auth)
+    const auth = useSelector(state=>state.auth)
+
     const loading = useSelector(state=>state.Loading)
+    const loadingdata = useSelector(state=>state.Loading)
+    const [loadinglocal,setloadinglocal]=useState(true)
+    
     const datadariredux = useSelector(state=>state.DataProjectReducers)
     const dispatch = useDispatch()
     const [data,setdata] = useState({})
@@ -22,21 +29,29 @@ const MyProject =()=>{
     const [modal,setmodal]=useState(false)
 
     useEffect(()=>{
+        var id = localStorage.getItem('id')
         dispatch(changeHeaderAction(1))
+        // console.log('auth',auth)
+        // console.log('id',id)
         // dispatch(changeFooterAction(1))
-        // dispatch(dataProject(id))
+        // console.log('masuk')
         // window.location.reload()
-
+            dispatch(dataProject(id))
+        
+        setloadinglocal(false)
         // Axios.get(`${APIURL}product/getprojectuser/${id}`)
         // .then((res)=>{
         //     // dispatch(dataProject(res.data))
         //     setdata(res.data)
         //     // console.log(res.data)
-        //     // setloading(false)
         // }).catch((err)=>{
         //     console.log(err)
         // })
     },[])
+
+    // useEffect(()=>{
+    //     setloadinglocal(false)
+    // },[loadinglocal])
 
 
     const renderProjectUser=()=>{
@@ -44,8 +59,9 @@ const MyProject =()=>{
         // return data.map((val,index)=>{
         //     console.log(val.gambarproject, index)
         // })
+        console.log(datadariredux,'datadariredux')
         return datadariredux.map((val,index)=>{
-            console.log(val.percentdonate)
+            // console.log(val.percentdonate)
             return(
              <div className='box-myproject d-flex flex-row' key={index}>
                  <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
@@ -59,7 +75,7 @@ const MyProject =()=>{
                     <div className='mt-3' style={{textAlign:'left', fontSize:'24px', fontWeight:'600'}}>{val.namaproject}</div>
                     </Link>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500'}}>{val.shortdescproject}</div>
-                    <div className='mt-3' style={{textAlign:'left', fontSize:'15px', fontWeight:'500', color:'green'}}>Target IDR {val.targetuang}</div>
+                    <div className='mt-3' style={{textAlign:'left', fontSize:'15px', fontWeight:'500', color:'green'}}>Target IDR <NumberFormat value={val.targetuang} displayType={"text"} thousandSeparator={true} /></div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'15px', fontWeight:'500', color:'green'}}>Funded : {parseInt(val.percentdonate)} %</div>
                     <div className='mt-3' style={{textAlign:'left', fontSize:'13px', fontWeight:'500'}}>Category : {val.categoryproject}</div>
                     <div style={{justifyContent:'center', maxWidth:'600px'}}>    
@@ -76,9 +92,10 @@ const MyProject =()=>{
         setdataedit(datadariredux[index])
         setmodal(true)
     }
-
-    
-    if(loading){
+    console.log(auth.id,'auth')
+    console.log(auth.loading,'auth',loading,'local',loadingdata,'dataloading')
+    if(loading && auth.loading && loadingdata){
+        // console.log(auth,'auth')
         return(
             <div>
                 Loading ...
@@ -86,7 +103,7 @@ const MyProject =()=>{
         )
     }
     console.log(data) 
-    console.log(datadariredux, 'redux')
+    // console.log(datadariredux, 'redux')
     return(
         <div>
             <center>

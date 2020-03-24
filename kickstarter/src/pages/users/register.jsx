@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import '../../css/register.css'
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { changeHeaderAction, changeFooterAction, UserRegister} from '../../redux/actions'
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,9 +25,9 @@ function Register() {
     let emailref = createRef() 
 
     
-    const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
+    // const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
     const dispatch = useDispatch()
-    const {register} = useSelector(state=>state.auth)
+    // const {register} = useSelector(state=>state.auth)
     
     useEffect(()=>{
       dispatch(changeHeaderAction(1))
