@@ -29,7 +29,7 @@ const ProjectDetails=(props)=>{
 
     useEffect(()=>{
         dispatch(changeHeaderAction(1))
-        console.log('woi')
+        // console.log('woi')
         Axios.get(`${APIURL}product/projectdetail/${id}`)
         .then((res)=>{
             console.log(res.data)
@@ -44,8 +44,11 @@ const ProjectDetails=(props)=>{
         setmodal(true)
     }
 
+    var idlocal = localStorage.getItem('id')
     const renderProjectDetail=()=>{
         return dataprojectdetail.map((val,index)=>{
+            console.log(val.iduser)
+            // console.log(idlocal)
                 return(
         <div key={index}>
             <div className= 'my-5 d-flex' >
@@ -54,14 +57,15 @@ const ProjectDetails=(props)=>{
                 <Progressbar defaultValue={0} value={val.percentdonate} height='15px' color='secondary' />
                 </div >
                         <div style={{position:'relative'}}>
-                        <div className='mt-3' style={{textAlign:'left', fontSize:'24px', fontWeight:'600'}}>{val.namaproject}</div>
-                        <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500'}}>{val.shortdescproject}</div>
-                        <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500', color:'#eb0f5d'}}>Target : IDR <NumberFormat value={val.targetuang} displayType={"text"} thousandSeparator={true} /></div>
-                        <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500', color:'#eb0f5d'}}>Funded : {parseInt(val.percentdonate)} %</div>
-                        <div className='mt-3' style={{textAlign:'left', fontSize:'13px', fontWeight:'500', color:'#757575'}}>By {val.username}  </div>
+                        <div className='mt-3' style={{textAlign:'left', fontSize:'26px', fontWeight:'600'}}>{val.namaproject}</div>
+                        <div className='mt-3' style={{textAlign:'left', fontSize:'20px', fontWeight:'600'}}>{val.shortdescproject}</div>
+                        <div className='mt-3' style={{textAlign:'left', fontSize:'20px', fontWeight:'600', color:'#eb0f5d'}}>Target : IDR <NumberFormat value={val.targetuang} displayType={"text"} thousandSeparator={true} /></div>
+                        <div className='mt-3' style={{textAlign:'left', fontSize:'20px', fontWeight:'600', color:'#eb0f5d'}}>Funded : {parseInt(val.percentdonate)} %</div>
+                        <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'600'}}>Category : {val.category}</div>
+                        <div className='mt-3' style={{textAlign:'left', fontSize:'15px', fontWeight:'600', color:'#757575'}}>By {val.username}  </div>
                         <div style={{position:'absolute', bottom:0, marginBottom:'17px'}}>
                             {
-                                role!=='1'?
+                                role!=='1' && val.iduser!==parseInt(idlocal)?
                                 <Button variant="contained" color="secondary" style={{width:'400px'}} onClick={toggleModal}>Donate to this Project</Button>
                                 :
                                 <Button variant="contained" style={{width:'400px'}} disabled>Donate to this Project</Button>
@@ -69,7 +73,7 @@ const ProjectDetails=(props)=>{
                         </div>
                     </div>
             </div>
-            <div style={{width:'180vh', marginLeft:'70px', textAlign:'left', marginBottom:'100px', fontWeight:'500', borderTop:'1px silver solid', paddingTop:'10px'}}>
+            <div style={{width:'180vh', marginLeft:'70px', textAlign:'left', marginBottom:'100px', fontWeight:'600', borderTop:'1px silver solid', paddingTop:'10px',fontSize:'17px'}}>
                 {val.aboutproject}
             </div>
         </div>
@@ -82,6 +86,7 @@ const ProjectDetails=(props)=>{
 
     const onAddImageFileChange=(event)=>{
         // console.log(document.getElementById('addImagePost').files[0])
+        console.log(event.target)
         console.log(event.target.files[0])
         var file=event.target.files[0]
         if(file){
@@ -129,8 +134,8 @@ const ProjectDetails=(props)=>{
 
 
     // console.log(id, 'idparams')
-    console.log(dataprojectdetail)
-    console.log(id)
+    // console.log(dataprojectdetail[0].iduser,'detail')
+    console.log(parseInt(idlocal),'login')
     if(loading){
         return(
             <div>
@@ -164,6 +169,7 @@ const ProjectDetails=(props)=>{
                         onChange={(event, value)=> setValue(value)}
                         style={{marginBottom:'30px', width:'450px'}}
                     />
+                    <input type = 'file' onChange={onAddImageFileChange} />
                     <CustomInput type='file' label={addimagefile.addImageFileName} id='addImagePost' onChange={onAddImageFileChange} className='form-control' />
                 </Modal>
             </div>

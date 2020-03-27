@@ -45,9 +45,11 @@ function Header (){
         <div className='main-header'>
             <div className='d-flex flex-row '>
                 <div className='box-header d-flex flex-row' style={{width:'40%'}}>
-                    <div className='m-2'>Explore</div>
+                    <Link to={'/explore'} style={{textDecoration:'none', color:'black'}}>
+                        <div className='m-2'>Explore</div>
+                    </Link>
                     <Link to={'/project'} style={{textDecoration:'none', color:'black'}}>
-                    <div className='m-2' style={{textDecoration:'none', color:'black'}}>Start  a Project</div>
+                        <div className='m-2' style={{textDecoration:'none', color:'black'}}>Start  a Project</div>
                     </Link>
 
                 </div>
@@ -58,8 +60,8 @@ function Header (){
                 </Link>
                 </div>
                 <div className='box-header d-flex flex-row justify-content-end' style={{width:'40%'}}>
-                    <div className='mt-3 mx-2'>Search</div>
-                    <div className='mt-3 mr-3'><SearchIcon/></div>
+                    {/* <div className='mt-3 mx-2'>Search</div>
+                    <div className='mt-3 mr-3'><SearchIcon/></div> */}
                     {
                         loginstatus
                         ?
@@ -67,9 +69,9 @@ function Header (){
                         {/* <Link to='/' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Hello, {username}</span></div></Link>
                         <Link to='/myproject' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>My Project</span></div></Link>
                         <Link to='/' style={{textDecoration:'none', color:'black'}} onClick={Logoutuser}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Logout</span></div></Link> */}
-                        <Dropdown style={{textDecoration:'none', marginTop:'7px'}} isOpen={dropdownOpen} toggle={toggleAccount}>
+                        <Dropdown style={{textDecoration:'none', marginTop:'9px'}} isOpen={dropdownOpen} toggle={toggleAccount}>
                             <DropdownToggle nav style={{color:'black'}}>
-                            Hello, {username} <ArrowDropDownIcon style={{marginBottom:'2px'}} />
+                            Hello, {username} <ArrowDropDownIcon style={{marginBottom:'8px'}} />
                             </DropdownToggle>
                             <DropdownMenu right>
                             <DropdownItem style={{ marginBottom: '10px' }}>
@@ -81,7 +83,7 @@ function Header (){
                             <DropdownItem>
                                 <NavLink href="/payment">Payment</NavLink>
                             </DropdownItem> */}
-                            <DropdownItem divider />
+                            {/* <DropdownItem divider /> */}
                             <DropdownItem>
                             </DropdownItem>
                             </DropdownMenu>

@@ -6,6 +6,7 @@ const INITIAL_STATE={
     email:'',
     role:0,
     error:'',
+    errorgalengkap:0,
     loginerror:"",
     login:false,
     loading:true,
@@ -19,6 +20,10 @@ export default (state=INITIAL_STATE, action)=>{
     switch(action.type){
         case 'SUCCESS_REGISTER':
             return {...state, ...action.payload, register:true, error:''}
+        case 'SUCCESS_REGISTER_REDIRECT':
+            return {...state, register:false}
+        case 'ERROR_REGISTER_TIDAKLENGKAP':
+            return {...state,errorgalengkap:1}
         case 'ERROR_REGISTER':
             return {...state,error:action.payload}
         case 'REGIS_LOADING':

@@ -107,7 +107,7 @@ const ListBayar=()=>{
            </td>
             <td>Rp. <NumberFormat value={val.jumlahdonasi} displayType={"text"} thousandSeparator={true} /></td>
             <td><div onClick={()=>tes(APIURLimage+val.buktidonasi)}>Donation Proof here <br></br> <VisibilityIcon/></div></td>
-            <td>
+            <td>  
             <Button onClick={()=>onClickButtonConfirm(val.id)} variant="contained" color="primary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>Confirm</Button>
             <Button onClick={()=>{onClickButtonDecline(val.id)}} variant="contained" color="secondary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>Decline</Button>
             </td>

@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import '../../css/login.css'
 import {useSelector, useDispatch} from 'react-redux'
-import { changeHeaderAction, changeFooterAction, loginAction} from '../../redux/actions'
+import { changeHeaderAction, changeFooterAction, loginAction,regissuccedredirect} from '../../redux/actions'
 // import { useState } from 'react';
 import {Redirect} from 'react-router-dom'
 
@@ -33,6 +33,7 @@ function Login() {
     useEffect(()=>{
       dispatch(changeHeaderAction(1))
       dispatch(changeFooterAction(1))
+      dispatch(regissuccedredirect())
     },[])
 
 

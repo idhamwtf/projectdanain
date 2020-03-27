@@ -3,11 +3,13 @@
     max-height: 100vh;
     color: #01579b;
     font-weight: 700;
+    font-family: 'Crimson Text', serif;
 }
 
 .admin-dashboard{
     width: 100%;
     /* border: 1px black solid; */
+    font-size: 18px;
 }
 
 .box-admin{
@@ -37,4 +39,11 @@
 .list-box-content{
     width: 250px;
     justify-content: center;
+}
+
+
+.asu{
+    -webkit-box-shadow: 5px 5px 15px 2px rgba(197,202,233,1);
+    -moz-box-shadow: 5px 5px 15px 2px rgba(197,202,233,1);
+    box-shadow: 5px 5px 15px 2px rgba(197,202,233,1);
 }

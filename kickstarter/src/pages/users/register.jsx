@@ -3,9 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import '../../css/register.css'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { changeHeaderAction, changeFooterAction, UserRegister} from '../../redux/actions'
 // import { Redirect } from 'react-router-dom';
+import Swal from 'sweetalert2'
+import { Redirect } from 'react-router-dom';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +30,7 @@ function Register() {
     
     // const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
     const dispatch = useDispatch()
-    // const {register} = useSelector(state=>state.auth)
+    const {register,errorgalengkap} = useSelector(state=>state.auth)
     
     useEffect(()=>{
       dispatch(changeHeaderAction(1))
@@ -45,12 +48,12 @@ function Register() {
         if(password===repassword){
           dispatch(UserRegister({username,password,email}))
         }
-        
+        console.log(errorgalengkap)
     }
 
-    // if(register){
-    //   return <Redirect to={'/login'}/>
-    // }
+    if(register){
+      return <Redirect to={'/login'}/>
+    }
   return (
       <div className='register'>
         <form className={classes.root}  noValidate autoComplete="off">
@@ -61,6 +64,10 @@ function Register() {
         <TextField id="standard-basic" label="Email" type="email" className='m-2' inputRef={emailref}/>
         {/* <div style={{marginTop:'auto'}}> */}
         <Button variant="contained" color="primary" className='button-login m-2' onClick={onClickRegister} >Register</Button>
+        {errorgalengkap?
+        <Alert severity="error">There's an empty field above, please fill it</Alert>:
+        null
+        }
         {/* </div> */}
             </div>
         </form>

@@ -47,7 +47,7 @@ if(role==='1'){
                 <ListProject/>:
                 list==='payment'?
                 <Listbayar/>:
-                <div className='box-admin' style={{width:'100%', backgroundColor:'#e8eaf6', color:'black'}}> Welcome to admin dashboard</div>
+                <div className='box-admin' style={{width:'100%', backgroundColor:'#e8eaf6', color:'black', paddingTop:'20px',fontSize:'50px'}}> Welcome to admin dashboard</div>
               }
               </div>
   </div>

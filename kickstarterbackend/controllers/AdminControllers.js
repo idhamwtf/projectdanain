@@ -97,7 +97,7 @@ module.exports={
         //trigger pindah page
         // console.log(dataCount)
         const page = parseInt(req.params.page) || 1
-        const pageSize = 10;
+        const pageSize = 5;
         const pager = paginate(dataCount, page, pageSize)
         
         //untuk limit database
@@ -108,7 +108,7 @@ module.exports={
             offset=pageSize*(page -1)
         }
         // console.log(req.params.page)
-        var sql=`select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.deleted=0 group by ps.id limit ? offset ?;`
+        var sql=`select ps.*,c.category,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id left join category c on c.id=ps.categoryproject where ps.deleted=0 group by ps.id limit ? offset ?;`
         mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{
             if(err2) res.status(500).send({message:err2})
             const pageOfdata = result2

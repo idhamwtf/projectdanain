@@ -3,9 +3,10 @@
     /* background-color: #05ce78; */
     background-color: white;
     /* color: #1b5e20; */
-
     color: #01579b;
-    font-weight: 500;
+    font-weight: 800;
+    font-family: 'Crimson Text', serif;
+    font-size: 20px;
 }
 /* 
 .adminheader>div{

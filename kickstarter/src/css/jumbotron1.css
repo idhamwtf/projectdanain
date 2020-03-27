@@ -21,11 +21,12 @@
 .minibox-jumobtron1>div{
  /* border: black 1px solid; */
  margin: 5px 2px;
+ border-bottom: 1px silver solid;
 }
 .minibox-jumobtron1>div>div {
     /* border: black 1px solid; */
-    margin: 5px 2px;
-    height: 21%;
+    margin: 0px 2px 5px 0px;
+    height: 20%;
     text-align: left;
     justify-content: left;
     padding-left: 2px;

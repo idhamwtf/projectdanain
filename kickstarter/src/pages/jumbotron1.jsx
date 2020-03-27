@@ -58,9 +58,9 @@ function Jumbotron1(){
                     <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                         <img style={{height:'100%',width:'100%'}} src={`${APIURLimage+val.gambarproject}`} alt=""/>
                         <Progressbar defaultValue={0} value={parseInt(parseInt(val.percentdonate))} height='15px' color='secondary' />
-                    <div className='mt-3' style={{textAlign:'left', fontSize:'24px', fontWeight:'600'}}>{val.namaproject}</div>
-                    <div className='mt-3' style={{textAlign:'left', fontSize:'18px', fontWeight:'500'}}>{val.shortdescproject}</div>
-                    <div className='mt-3' style={{textAlign:'left', fontSize:'13px', fontWeight:'500', color:'#757575'}}>By {val.username}</div>
+                    <div className='mt-3' style={{textAlign:'left', fontSize:'26px', fontWeight:'700'}}>{val.namaproject}</div>
+                    <div className='mt-3' style={{textAlign:'left', fontSize:'20px', fontWeight:'600'}}>{val.shortdescproject}</div>
+                    <div className='mt-3' style={{textAlign:'left', fontSize:'15px', fontWeight:'600', color:'#757575'}}>By {val.username}</div>
                     </Link>
                 </div>
                 )
@@ -78,7 +78,7 @@ function Jumbotron1(){
                     </Link>
                     </div>
                     <div className='mr-3' style={{width:'57%'}}>
-                        <div className='minibox-title' style={{ overflow:'hidden' , fontWeight:'bold'}}>
+                        <div className='minibox-title' style={{ overflow:'hidden' , fontWeight:'bold',fontSize:'19px'}}>
                         <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                             {val.namaproject}
                         </Link>
@@ -114,7 +114,7 @@ function Jumbotron1(){
     return (
         <div className='jumbotron-1 d-flex flex-row'>
             <div className='box-jumbotron1 my-5' style={{borderRight:'1px silver solid'}} >
-                <div style={{textAlign:'left', margin:'15px 10%', color:'#757575', fontWeight:'bold'}}>Featured Project</div>
+                <div style={{textAlign:'left', margin:'15px 10%', color:'#757575', fontWeight:'bold', fontSize:'18px'}}>Featured Project</div>
                 {renderFeatured()}
                 {/* <div style={{height:'60%', width:'75%', margin:'15px 10%'}} >
                     <img style={{height:'100%',width:'100%'}} src="https://ksr-static.imgix.net/8v9uwida-valor_anthology.png?ixlib=rb-2.1.0&auto=compress%2Cformat&w=1000&fit=min&s=4bcc268b184adad6cba9bb23fc75c1e7" alt=""/>
@@ -125,7 +125,7 @@ function Jumbotron1(){
                 </div> */}
             </div>
             <div className='box-jumbotron1 my-5'>
-            <div style={{textAlign:'left', margin:'15px 10%', color:'#757575', fontWeight:'bold'}}>Recommend for you</div>
+            <div style={{textAlign:'left', margin:'15px 10%', color:'#757575', fontWeight:'bold', fontSize:'18px'}}>Recommend for you</div>
                 <div style={{height:'82%', width:'90%', margin:'15px 10%'}} >
                     {renderRecommend()}
                     {/* <div className='minibox-jumobtron1 d-flex flex-row'>
@@ -192,7 +192,7 @@ function Jumbotron1(){
                             </div>
                         </div>
                     </div> */}
-                    <div style={{ marginLeft: '14%', width: '350px', marginTop:'50px' }}>
+                    <div style={{ marginLeft: '14%', width: '350px', marginTop:'25px' }}>
                  {pager.pages && pager.pages.length &&
                 <ul className="pagination">
                     <li className={`page-item first-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>

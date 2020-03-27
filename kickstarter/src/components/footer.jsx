@@ -34,7 +34,7 @@ export default function Footer(){
             <div className='footer-box-content'>
                     <span>About</span> <span style={{fontWeight:'700', fontSize:'16px', color:'#01579b'}}>DANA•IN</span>
                 </div>
-                <div className='footer-box-content' style={{fontSize:'12px'}}>
+                <div className='footer-box-content' style={{fontSize:'14px'}}>
                     DANA•IN is crowd-funding website.<br></br>
                     the concept and design inspired by kickstarter.<br></br>
                     Created  forIndonesian people to help creative project <br></br>

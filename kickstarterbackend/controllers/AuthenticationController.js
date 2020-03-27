@@ -29,6 +29,7 @@ module.exports={
                     email,
                     status:0,
                     role:2,
+                    deleted:0,
                     created:myDate
                 }
                 sql = `insert into users set ?`

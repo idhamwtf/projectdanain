@@ -9,7 +9,23 @@ import { CustomInput } from 'reactstrap';
 import Axios from 'axios';
 import { APIURL } from '../../helper/apiurl';
 import moment from 'moment'
+import Swal from 'sweetalert2'
+import { Redirect } from 'react-router-dom';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
 
+const useStyles = makeStyles(theme => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
 
 
 
@@ -17,21 +33,38 @@ import moment from 'moment'
 
 const Projectusers =()=>{
 
+
+    const classes = useStyles();
     // const [project,setproject] = useState({})
     const [addimagefile,setimageadd]=useState({
         addImageFileName:'Select your Image',
         addImageFile:undefined,
-      })
-
+    })
+    
     // const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
     const dispatch = useDispatch()
     const {id} = useSelector(state=>state.auth)
+    const [data,setdata]=useState({})
+    const [category,setcategory]=useState()
+    const [loading,setloading]=useState(true)
+    const [redirect,setredirect]=useState(false)
 
         useEffect(()=>{
             dispatch(changeHeaderAction(1))
-            // console.log(id)
-            // dispatch(changeFooterAction(1))
+            Axios.get(`${APIURL}product/getcategory`)
+            .then((res)=>{
+                console.log(res)
+                setcategory(res.data)
+            }).catch((err)=>{
+                console.log(err)
+            }).finally((final)=>{
+                setloading(false)
+            })
         },[])
+
+        useState(()=>{
+            setredirect(false)
+        },[redirect])
         console.log(id)
 
       let namaproject = createRef()
@@ -40,6 +73,21 @@ const Projectusers =()=>{
       let aboutproject = createRef()
       let targetuang = createRef() 
       let categoryproject = createRef()
+
+      const onChangeInput=(e)=>{
+        var myDate =  moment().format("YYYY-MM-DD HH:mm:ss");
+          const {name,value} = e.target
+          setdata({...data,[name]: value,iduser:id,deleted:0,datepost:myDate })
+          console.log(data)
+      }
+
+      const renderCategory=()=>{
+          return category.map((val,index)=>{
+              return(
+                <MenuItem value={val.id} key={index}>{val.category}</MenuItem>
+              )
+          })
+      }
 
       const onAddImageFileChange=(event)=>{
         // console.log(document.getElementById('addImagePost').files[0])
@@ -55,55 +103,105 @@ const Projectusers =()=>{
 
 
       const onSubmitProject =()=>{
-            var formdata=new FormData()
-            namaproject = namaproject.current.value
-            shortdescproject = shortdescproject.current.value
-            // gambarproject = gambarproject.current.value
-            aboutproject = aboutproject.current.value
-            targetuang = targetuang.current.value
-            categoryproject = categoryproject.current.value
-            var myDate =  moment().format("YYYY-MM-DD HH:mm:ss");
-                
-            const data = {
-                namaproject,
-                aboutproject,
-                shortdescproject,
-                targetuang,
-                categoryproject,
-                gambarproject,
-                iduser:id,
-                deleted:0,
-                datepost:myDate
-            }
+          if(id===0){
+                let timerInterval
+                Swal.fire({
+                title: 'You need login before creating a project !',
+                html: 'I will close in <b></b> milliseconds.',
+                timer: 3000,
+                timerProgressBar: true,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                    timerInterval = setInterval(() => {
+                    const content = Swal.getContent()
+                    if (content) {
+                        const b = content.querySelector('b')
+                        if (b) {
+                        b.textContent = Swal.getTimerLeft()
+                        }
+                    }
+                    }, 100)
+                },
+                onClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+          }else{
+              var formdata=new FormData()
+              var myDate =  moment().format("YYYY-MM-DD HH:mm:ss");
+              
               formdata.append('image',addimagefile.addImageFile)
               formdata.append('data',JSON.stringify(data))
               var Headers={
-                headers:
-                {
-                    'Content-Type':'multipart/form-data',
+                  headers:
+                  {
+                      'Content-Type':'multipart/form-data',
+                    }
                 }
-              }
-
-            //   UserAddProject(formdata)
-            Axios.post(`${APIURL}product/addproject`,formdata,Headers)
-            .then((res)=>{
-                console.log('berhasil')
-            }).catch((err)=>{
-                console.log('err')
-            })
+                
+                //   UserAddProject(formdata)
+                Axios.post(`${APIURL}product/addproject`,formdata,Headers)
+                .then((res)=>{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Success adding project :)',
+                        showConfirmButton: false,
+                        timer: 2500
+                      }).then((res2)=>{
+                        console.log(res2)
+                        console.log('berhasil',res)
+                      }).catch((err)=>{
+                          console.log(err)
+                      }).finally(()=>{
+                        setredirect(true)
+                      })
+                    
+                      
+                }).catch((err)=>{
+                    console.log('err')
+                })
+            }
+                
+            }
             
-      }
-  
-      return (
+    if(redirect){
+        return <Redirect to={'/myproject'} />
+    }
+
+    if(loading){
+        return(
+            <div>Loading...</div>
+        )
+    }
+    return (
     <div className='projectadduser'>
         <center>
             <div style={{fontSize:'34px', fontWeight:'200', marginRight:'2%', marginTop:'5px'}}>Start your project</div>
             <div className='d-flex flex-column' style={{ width:'35%', height:'100%'}}>
-                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Name" inputRef={namaproject} />
-                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="What is your project ?" inputRef={shortdescproject} />
+                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Name" onChange={onChangeInput} name='namaproject'/>
+                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="What is your project ?" onChange={onChangeInput} name='shortdescproject' />
                 {/* <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Image"  inputRef={gambarproject}/> */}
-                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Money Goal" inputRef={targetuang} />
-                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}}    id="standard-basic" label="Category" inputRef={categoryproject} />
+                <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Money Goal" onChange={onChangeInput} name='targetuang' />
+                {/* <TextField className='inputporjectusers m-2' style={{width:'98%', marginTop:'5px'}}    id="standard-basic" label="Category" onChange={onChangeInput} name='categoryproject' /> */}
+                <FormControl className={classes.formControl} style={{width:'98%', marginTop:'5px'}}>
+                    <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        label='category'
+                        id="demo-simple-select"
+                        // value={data.categoryproject}
+                        onChange={onChangeInput}
+                        name='categoryproject'
+                        >
+                        {renderCategory()}
+                    </Select>
+                </FormControl>
                 <CustomInput className='form-control inputporjectusers m-2' style={{width:'98%', marginTop:'10px'}} type='file' label={addimagefile.addImageFileName} id='addImagePost' 
                 onChange={onAddImageFileChange}
                  />
@@ -114,7 +212,8 @@ const Projectusers =()=>{
                     multiline
                     rows="4"
                     variant="outlined"
-                    inputRef={aboutproject}
+                    onChange={onChangeInput} 
+                    name='aboutproject'
                     />
                 <Button variant="contained" color="primary" className='button-login mt-3'  onClick={onSubmitProject}>Submit</Button>
             </div>

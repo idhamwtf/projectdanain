@@ -12,6 +12,7 @@ import Axios from 'axios';
 import { APIURL, APIURLimage } from '../../helper/apiurl';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import NumberFormat from 'react-number-format'
 
 
 const ListBayar=()=>{
@@ -78,8 +79,10 @@ const ListBayar=()=>{
 
       const renderList=()=>{
           return dataproject.map((val,index)=>{
-              return(
-                <div className='box-list d-flex flex-row' style={{backgroundColor:'white', margin:'25px', height:'300px'}} key={index}>
+              if(page===1){
+
+                  return(
+                      <div className='box-list d-flex flex-row asu' style={{backgroundColor:'white', margin:'25px', height:'300px'}} key={index}>
                     <div>{index+1}.</div>
                     <div style={{marginLeft:'20px', marginTop:'20px'}}>
                         <img src={`${APIURLimage+val.gambarproject}`} style={{width:'300px'}}/>
@@ -87,11 +90,11 @@ const ListBayar=()=>{
                     <div className='d-flex flex-column' style={{marginLeft:'30px', textAlign:'left'}}>
                         <div style={{marginBottom:'1px'}}>Title : {val.namaproject} </div>
                         <div style={{marginBottom:'1px'}}>Short Desc : {val.shortdescproject}</div>
-                        <div style={{marginBottom:'1px'}}>Category : {val.categoryproject}</div>
-                        <div style={{marginBottom:'1px', color:'green'}}>Target : {val.targetuang}</div>
+                        <div style={{marginBottom:'1px'}}>Category : {val.category}</div>
+                        <div style={{marginBottom:'1px', color:'green'}}>Target : Rp. <NumberFormat value={val.targetuang} displayType={"text"} thousandSeparator={true} /></div>
                         <div style={{marginBottom:'1px', color:'green'}}>Funded : {parseInt(val.percentdonate)}%</div>
                         <div style={{marginBottom:'1px',fontWeight:'500'}}>By user : {val.username}</div>
-                        <div style={{marginBottom:'1px',fontWeight:'400'}}>Tanggal post : {val.datepost}</div>
+                        <div style={{marginBottom:'1px',fontWeight:'500'}}>Tanggal post : {val.datepost}</div>
                     </div>
                     {/* <div>Jumlah Donasi</div> */}
                     {/* <div style={{marginLeft:'200px'}}>Bukti Donasi</div> */}
@@ -101,7 +104,32 @@ const ListBayar=()=>{
                     </div>
                 </div>
               )
-          })
+            }else{
+                return(
+                    <div className='box-list d-flex flex-row asu' style={{backgroundColor:'white', margin:'25px', height:'300px'}} key={index}>
+                    <div>{(index+1*(page+5))-1}.</div>
+                    <div style={{marginLeft:'20px', marginTop:'20px'}}>
+                        <img src={`${APIURLimage+val.gambarproject}`} style={{width:'300px'}}/>
+                    </div>
+                    <div className='d-flex flex-column' style={{marginLeft:'30px', textAlign:'left'}}>
+                        <div style={{marginBottom:'1px'}}>Title : {val.namaproject} </div>
+                        <div style={{marginBottom:'1px'}}>Short Desc : {val.shortdescproject}</div>
+                        <div style={{marginBottom:'1px'}}>Category : {val.category}</div>
+                        <div style={{marginBottom:'1px', color:'green'}}>Target : Rp. <NumberFormat value={val.targetuang} displayType={"text"} thousandSeparator={true} /></div>
+                        <div style={{marginBottom:'1px', color:'green'}}>Funded : {parseInt(val.percentdonate)}%</div>
+                        <div style={{marginBottom:'1px',fontWeight:'500'}}>By user : {val.username}</div>
+                        <div style={{marginBottom:'1px',fontWeight:'500'}}>Tanggal post : {val.datepost}</div>
+                    </div>
+                    {/* <div>Jumlah Donasi</div> */}
+                    {/* <div style={{marginLeft:'200px'}}>Bukti Donasi</div> */}
+                    <div className='d-flex flex-row' style={{marginTop:'10px',marginBottom:'15px', marginLeft:'auto', marginRight:'7px'}}>
+                    {/* <Button variant="contained" color="primary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>Confirm</Button> */}
+                    <Button onClick={()=>onClickButtonDelete(val.id)} variant="contained" color="secondary" style={{width:'200px',height:'85px', textAlign:'center', marginRight:'10px',marginTop:'70px'}}>DELETE PROJECT</Button>
+                    </div>
+                </div>
+              )
+            }
+            })
       }
 
     return(

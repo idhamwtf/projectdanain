@@ -17,6 +17,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import MyProject from './pages/users/myproject'
 import {dataProject, getbukti} from './redux/actions'
 import ProjectDetails from './pages/users/projectdetails'
+import ExploreProject from './pages/exploreproject'
 
 function App() {
   const dispatch = useDispatch()
@@ -65,6 +66,7 @@ function App() {
         <Route path={'/project'} exact component={Project}/>
         <Route path={'/myproject'} exact component = {MyProject}/>
         <Route path={'/projectdetail/:id'} exact component ={ProjectDetails}/>
+        <Route path={'/explore'} exact component={ExploreProject}/>
         {/* <Route path={'/logout'} exact component ={Homepage}/> */}
       </Switch>
       <Footer/>
