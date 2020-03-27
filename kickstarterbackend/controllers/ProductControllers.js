@@ -12,7 +12,7 @@ module.exports={
         })
     },
     postProject:(req,res)=>{
-        console.log('masukbrok', req.body)
+        // console.log('masukbrok', req.body)
         try{
             const path = "/usersproject/images"
             const upload = uploader(path, 'PROJECTUSERS').fields([{name:'image'}])
@@ -21,7 +21,7 @@ module.exports={
                 if(err){
                     return res.status(500).send({message:'upload gagal', error:err.message})
                 }
-                console.log(JSON.parse(req.body.data))
+                // console.log(JSON.parse(req.body.data))
                 
                 const { image } =req.files
                 const ImagePath = image ? path + '/' + image[0].filename : null
@@ -61,8 +61,8 @@ module.exports={
         })
     },
     editProject:(req,res)=>{
-        console.log('masukbrok', req.body)
-        console.log('params', req.params.id)
+        // console.log('masukbrok', req.body)
+        // console.log('params', req.params.id)
         try{
             const path = "/usersproject/images"
             const upload = uploader(path, 'PROJECTUSERS').fields([{name:'image'}])
@@ -71,7 +71,7 @@ module.exports={
                 if(err){
                     return res.status(500).send({message:'upload gagal', error:err.message})
                 }
-                console.log(JSON.parse(req.body.data))
+                // console.log(JSON.parse(req.body.data))
                 
                 const { image } =req.files
                 const ImagePath = image ? path + '/' + image[0].filename : null
@@ -198,11 +198,11 @@ module.exports={
         // console.log(req.params.page)
         const {data} = req.body.data
         var sql=`SELECT ps.*,c.category,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate FROM projectusers ps left join donation d on d.idproject=ps.id left join users u on u.id=ps.iduser left join category c on c.id=ps.categoryproject WHERE ps.deleted=0 AND ps.namaproject LIKE '%${data}%' or ps.deleted=0 AND c.category LIKE '%${data}%' group by ps.id limit ? offset ?;`
-        console.log(pageSize)
+        // console.log(pageSize)
         // console.log(offset)
         mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{
             if(err2) res.status(500).send({message:err2})
-            console.log(result2)
+            // console.log(result2)
             const pageOfdata = result2
             return res.status(200).send({pageOfdata, pager})
         })

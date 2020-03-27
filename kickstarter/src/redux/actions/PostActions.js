@@ -1,9 +1,6 @@
 import Axios from 'axios'
 import {APIURL} from './../../helper/apiurl'
 
-// {namaproject, aboutproject, shortdescproject, targetuang, targetwaktu, categoryproject, gambarproject} 
-
-
 export const UserAddProject=(data)=>{
     var Headers={
         headers:
@@ -11,9 +8,6 @@ export const UserAddProject=(data)=>{
             'Content-Type':'multipart/form-data',
         }
       }
-
-      console.log(data)
-    
     return (dispatch)=>{
             Axios.post(`${APIURL}product/addproject`,data, Headers)
             .then((res)=>{

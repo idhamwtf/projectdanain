@@ -13,7 +13,7 @@ module.exports={
         if(err1) res.status(500).send({message:error})
         dataCount = result1[0].count
         //trigger pindah page
-        console.log(dataCount)
+        // console.log(dataCount)
         const page = parseInt(req.params.page) || 1
         const pageSize = 10;
         const pager = paginate(dataCount, page, pageSize)

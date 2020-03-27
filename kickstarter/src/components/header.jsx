@@ -10,7 +10,7 @@ import {DropdownToggle, DropdownMenu, DropdownItem, Dropdown } from "reactstrap"
 function Header (){
     const dispatch = useDispatch()
 
-    const {username,role} = useSelector(state=>state.auth)
+    const {username,role,loginstatus} = useSelector(state=>state.auth)
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -53,7 +53,7 @@ function Header (){
                 </Link>
                 </div>
                 <div className='box-header d-flex flex-row justify-content-end' style={{width:'40%'}}>
-                        loginstatus
+                        {loginstatus
                         ?
                         <div className='d-flex flex-row'>
                         <Dropdown style={{textDecoration:'none', marginTop:'9px'}} isOpen={dropdownOpen} toggle={toggleAccount}>

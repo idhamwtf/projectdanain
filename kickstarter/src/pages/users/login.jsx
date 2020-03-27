@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import '../../css/login.css'
 import {useSelector, useDispatch} from 'react-redux'
 import { changeHeaderAction, changeFooterAction, loginAction,regissuccedredirect} from '../../redux/actions'
-// import { useState } from 'react';
 import {Redirect} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
@@ -21,14 +20,12 @@ const useStyles = makeStyles(theme => ({
 
 function Login() {
   const classes = useStyles();
-  // const [redirect, setredirect]= useState(false)
     let usernameref = createRef()
     let passwordref = createRef() 
 
-    
-    // const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
-    const redirect = useSelector(state=>state.Redirect)
     const dispatch = useDispatch()
+
+    const redirect = useSelector(state=>state.Redirect)
     
     useEffect(()=>{
       dispatch(changeHeaderAction(1))
@@ -53,9 +50,7 @@ function Login() {
             <div className='d-flex flex-column box-login'> 
         <TextField id="standard-basic" label="Username" className='m-2' inputRef={usernameref} />
         <TextField id="standard-basic" label="Password" type="password" className='m-2' inputRef={passwordref}/>
-        {/* <div style={{marginTop:'auto'}}> */}
         <Button variant="contained" color="primary" className='button-login m-2' onClick={onClickLogin} >Login</Button>
-        {/* </div> */}
             </div>
         </form>
       </div>

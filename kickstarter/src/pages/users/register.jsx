@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 function Register() {
     const classes = useStyles();
+    
     const dispatch = useDispatch()
 
     let usernameref = createRef()
@@ -27,7 +28,7 @@ function Register() {
     let repasswordref = createRef()
     let emailref = createRef() 
 
-    const {register,errorgalengkap} = useSelector(state=>state.auth)
+    const {register,errorgalengkap,error} = useSelector(state=>state.auth)
     
     useEffect(()=>{
       dispatch(changeHeaderAction(1))
@@ -63,6 +64,8 @@ function Register() {
             {errorgalengkap?
             <Alert severity="error">There's an empty field above, please fill it</Alert>
             :
+            error?
+            <Alert severity="error">{error}</Alert>:
             null
             }
                 </div>

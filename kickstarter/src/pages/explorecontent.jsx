@@ -1,8 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import './../css/explore.css'
 import './../css/searchbox.css'
-import TextField from '@material-ui/core/TextField';
-import SearchIcon from '@material-ui/icons/Search';
 import {changeHeaderAction} from './../redux/actions'
 import { useDispatch } from 'react-redux';
 import { APIURL,APIURLimage } from '../helper/apiurl';
@@ -15,21 +13,18 @@ import NumberFormat from 'react-number-format'
 
 const ExploreContent=(props)=>{
     const dispatch = useDispatch()
+
     const [page,setPage]=useState(1)
     const [pager,setpager]=useState({})
     const [datasearch,setdatasearch]=useState([])
-    // const [datainput,setdatainput]=useState('')
     const [loading,setloading]=useState(true)
 
-    // console.log(props)
     const data = props
 
     useEffect(()=>{
         dispatch(changeHeaderAction(1))
-        console.log('didmount')
             Axios.post(`${APIURL}product/getsearch/${page}`, {data})
             .then((res)=>{
-                console.log(res.data)
                 setpager(res.data.pager)
                 setdatasearch(res.data.pageOfdata)
             }).catch((err)=>{
@@ -40,68 +35,47 @@ const ExploreContent=(props)=>{
     },[])
     useEffect(()=>{
         dispatch(changeHeaderAction(1))
-        console.log('update')
         setloading(true)
             Axios.post(`${APIURL}product/getsearch/${page}`, {data})
             .then((res)=>{
-                // console.log(res.data)
                 setdatasearch(res.data.pageOfdata)
                 setpager(res.data.pager)
             }).catch((err)=>{
                 console.log(err)
             }).finally((final)=>{
                 setloading(false)
-            })
-        
-        // if(data && page>1){
-        //     setPage(1)
-        //     Axios.post(`${APIURL}product/getsearch/${page}`, {data})
-        //     .then((res)=>{
-        //         console.log(res.data)
-        //         setdatasearch(res.data.pageOfdata)
-        //         setpager(res.data.pager)
-        //     }).catch((err)=>{
-        //         console.log(err)
-        //     }).finally((final)=>{
-        //         setloading(false)
-        //     })
-        // }
-        // if(data && pag)
-        
+            }) 
     },[page,props.data])
 
-    // useEffect(()=>{
-
-    // })
 
     const renderSearch=()=>{
         return datasearch.map((val,index)=>{
             return (
                 <div className='box-search-content-isi d-flex flex-row' key={index}>
-                <div style={{height:'100%', width:'25%'}}>
+                <div style={{height:'100%', width:'30%', border:'none'}}>
                     <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                         <img src={`${APIURLimage+val.gambarproject}`} style={{width:'100%',height:'100%'}} />
                     </Link>
                 </div>
-                <div className='d-flex flex-column' style={{width:'50%', marginLeft:'1%'}}>
-                    <div>
+                <div className='d-flex flex-column' style={{width:'66%', marginLeft:'0'}}>
+                    <div style={{fontSize:'26px', fontWeight:'700'}}>
                     <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                         {val.namaproject}
                     </Link>
                     </div>
-                    <div>
+                    <div style={{fontSize:'20px', fontWeight:'600'}}>
                         {val.shortdescproject}        
                     </div>
-                    <div>
+                    <div style={{fontSize:'18px', fontWeight:'600'}}>
                         Category : {val.category}
                     </div>
-                    <div>
+                    <div style={{fontSize:'18px', fontWeight:'600'}}>
                         Target : Rp. <NumberFormat value={val.targetuang} displayType={"text"} thousandSeparator={true} />
                     </div>
-                    <div>
-                        Funded : {val.percentdonate}%
+                    <div style={{fontSize:'18px', fontWeight:'600', color:'green'}}>
+                        Funded : {parseInt(val.percentdonate)}%
                     </div>
-                    <div>
+                    <div style={{fontSize:'18px', fontWeight:'600'}}>
                         By : {val.username}
                     </div>
                 </div>
@@ -109,7 +83,7 @@ const ExploreContent=(props)=>{
             )
         })
     }
-    console.log(datasearch)
+
     if(loading){
         return(
             <div>Loading..</div>
@@ -122,12 +96,10 @@ const ExploreContent=(props)=>{
         
         )
     }else{
-        // console.log(pager.pages)
-        // console.log(pager.pages.length)
         return(
         <div className='box-search-content d-flex flex-column'>
             {renderSearch()}
-        <div style={{ marginLeft: '25%', width: '350px'}}>
+        <div style={{ marginLeft: '40%', width: '350px'}}>
                 {pager.pages && pager.pages.length &&
                 <ul className="pagination">
                     <li className={`page-item first-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>

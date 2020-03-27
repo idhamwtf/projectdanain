@@ -13,10 +13,6 @@ import ExploreContent from './explorecontent'
 
 
 const Explore=()=>{
-    const dispatch = useDispatch()
-    const [page,setPage]=useState(1)
-    const [pager,setpager]=useState({})
-    const [datasearch,setdatasearch]=useState([])
     const [datainput,setdatainput]=useState('')
     const [loading,setloading]=useState(true)
 
@@ -27,7 +23,6 @@ const Explore=()=>{
 
     const onChangeInput=(e)=>{
           setdatainput(e.target.value)
-          console.log(datainput)
       }
 
       if(loading){
@@ -37,11 +32,10 @@ const Explore=()=>{
               </div>
           )
         }else{
-            // console.log(pager)
             return(
             <div className='explore-box'>
                 <div className='explore-search d-flex flex-row'>
-                <TextField id="standard-basic" label="what are you looking for ?" style={{width:'98%'}} onChange={onChangeInput}/><SearchIcon style={{marginTop:'12px', borderBottom:'1px #c6c6c6 solid',fontSize:'36px'}}/>
+                <TextField id="standard-basic" label="what are you looking for ?" style={{width:'100%'}} onChange={onChangeInput}/><SearchIcon style={{marginTop:'12px',fontSize:'36px'}}/>
                 </div>
                 <ExploreContent data={datainput}/>
             </div>

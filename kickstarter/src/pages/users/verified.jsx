@@ -11,15 +11,13 @@ class Verified extends React.Component {
 
       }
     componentDidMount(){
-        // console.log(this.props.location.search)
         var params=queryString.parse(this.props.location.search)
-        // console.log(params.username)
         var username=params.username
         var password=params.password
+
         Axios.put(`${APIURL}auth/verifikasiemail`,{
             username,password
         }).then((res)=>{
-            console.log(res.data,'masuk')
             this.setState({status:'berhasil'})
         }).catch((err)=>{
             console.log(err)

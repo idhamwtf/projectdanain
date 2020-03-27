@@ -31,10 +31,8 @@ export default (state=INITIAL_STATE, action)=>{
         case 'REGIS_LOADING':
             return {...state,loading:true,error:''}
         case USER_LOGIN_SUCCESS:
-            // console.log(action.payload)
             return {...state,...action.payload, authchecked:true,loginstatus:true,loading:false }
         case `USER_LOGOUT`:
-            console.log(`asuuu`)
             return INITIAL_STATE
         case AUTH_LOADING:
             return {...state,error:"",loading:true}

@@ -15,15 +15,16 @@ import { APIURL } from './helper/apiurl';
 import { reLogin } from './redux/actions';
 import {useDispatch, useSelector} from 'react-redux'
 import MyProject from './pages/users/myproject'
-import {dataProject, getbukti} from './redux/actions'
+import {getbukti} from './redux/actions'
 import ProjectDetails from './pages/users/projectdetails'
 import ExploreProject from './pages/exploreproject'
 
 function App() {
   const dispatch = useDispatch()
-  const {id,role,loading} = useSelector(state=>state.auth)
+
+  const {loading} = useSelector(state=>state.auth)
+
   const [loadinglocal,setloadinglocal] = useState(true)
-  const [refresh,setrefresh]=useState(true)
 
   useEffect(()=>{
     var id = localStorage.getItem('id')
@@ -47,7 +48,6 @@ function App() {
 
   // console.log(role)
 
-  console.log(loading)
   if(loading && loadinglocal){
     return(
       <div>Loading...</div>

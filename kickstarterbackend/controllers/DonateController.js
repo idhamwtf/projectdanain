@@ -15,7 +15,7 @@ module.exports={
                 if(err){
                     return res.status(500).send({message:'upload gagal', error:err.message})
                 }
-                console.log(JSON.parse(req.body.data))
+                // console.log(JSON.parse(req.body.data))
                 
                 const { image } =req.files
                 const ImagePath = image ? path + '/' + image[0].filename : null
