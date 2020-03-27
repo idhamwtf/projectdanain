@@ -1,8 +1,8 @@
 import React from 'react';
 import './../css/notfound.css'
 import { useEffect } from 'react';
-import { useSelector,useDispatch } from 'react-redux';
-import {changeFooterAction, changeHeaderAction} from '../redux/actions'
+import {useDispatch } from 'react-redux';
+import {changeHeaderAction} from '../redux/actions'
 
 
 const Notfound =()=>{

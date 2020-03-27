@@ -109,6 +109,7 @@ const ExploreContent=(props)=>{
             )
         })
     }
+    console.log(datasearch)
     if(loading){
         return(
             <div>Loading..</div>

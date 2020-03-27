@@ -10,9 +10,11 @@ import { Redirect } from 'react-router-dom';
 function Homepage(){
 
     const dispatch = useDispatch()
+
     const [loading,setloading]=useState(true)
-    const {role} = useSelector(state=>state.auth)
     const [roleredirect,setroleredirect]=useState(0)
+
+    const {role} = useSelector(state=>state.auth)
 
     useEffect(()=>{
         dispatch(changeHeaderAction(0))
@@ -25,10 +27,6 @@ function Homepage(){
     setroleredirect(role)
     })
 
-
-    console.log(role)
-    
-
     if(loading){
         return (
             <div>
@@ -36,15 +34,13 @@ function Homepage(){
             </div>
         )
     }else if(roleredirect==='1'){
-        console.log('admin')
         return <Redirect to='/admin'/>
     }
-    console.log('user')
-    return (
-        <div>
-            <Jumbotron1/>
-            <Jumbotron2/>
-        </div>
+        return (
+            <div>
+                <Jumbotron1/>
+                <Jumbotron2/>
+            </div>
     )
     
 }

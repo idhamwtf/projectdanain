@@ -28,9 +28,6 @@ export default function Headeradmin(){
                     Back to home
                 </div>
                 </Link>
-                {/* <div style={{}} className='header-kanan-admin'>
-                    Logout
-                </div> */}
                 <Link to='/' style={{textDecoration:'none', color:'#01579b', marginTop:'8px'}} onClick={Logoutuser}><div className=' header-kanan-admin my-3 mx-4'><span>Logout</span></div></Link>
             </div>
         </div>

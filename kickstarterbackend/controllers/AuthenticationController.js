@@ -7,7 +7,6 @@ const moment = require('moment')
 module.exports={
     registeruser : (req,res)=>{ 
         var {username, password, email} = req.body
-
         // req.body.username
         // req.body.password
         var sql = `select username,email from users where username='${username}' or email='${email}'`
@@ -18,7 +17,7 @@ module.exports={
                 return res.status(500).send({status:'error', err})
             }
             if(result.length>0){
-                console.log(result,'gagal')
+                // console.log(result,'gagal')
                 return res.status(200).send({status:'error', message: 'username/email has been taken'})
             }else{
                 var hashpassword = encryptpassword(password)
@@ -48,7 +47,7 @@ module.exports={
                     transporter.sendMail(mailoptions,(err2,res2)=>{
                         //ini untuk kirim email verif
                         if(err2){
-                            console.log(err2)
+                            // console.log(err2)
                             return res.status(500).send({status:'error',err:err2})
                         }
                         console.log(`success`)
@@ -98,7 +97,7 @@ module.exports={
             }
             transporter.sendMail(mailoptions,(err2,res2)=>{
                 if(err2){
-                    console.log(err2)
+                    // console.log(err2)
                     return res.status(500).send({status:'error',err:err2})
                 }
                 console.log(`success`)
@@ -118,7 +117,7 @@ module.exports={
                     res.send({message:err})
                 }
                 if(result.length > 0){
-                    console.log(result[0],'masuk if id')
+                    // console.log(result[0],'masuk if id')
                     return res.status(200).send({id:result[0].id, username:result[0].username, password: result[0].password, role:result[0].role, status:'login berhasil'})
                 }else{
                     return res.status(500).send({status:'error', message:'username atau password salah'})

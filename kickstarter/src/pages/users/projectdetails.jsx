@@ -169,7 +169,7 @@ const ProjectDetails=(props)=>{
                         onChange={(event, value)=> setValue(value)}
                         style={{marginBottom:'30px', width:'450px'}}
                     />
-                    <input type = 'file' onChange={onAddImageFileChange} />
+                    {/* <input type = 'file' onChange={onAddImageFileChange} /> */}
                     <CustomInput type='file' label={addimagefile.addImageFileName} id='addImagePost' onChange={onAddImageFileChange} className='form-control' />
                 </Modal>
             </div>

@@ -10,4 +10,8 @@ router.get('/getlistproject/:page', AdminController.getListProject)
 router.put('/deleteprojectadmin/:id', AdminController.deleteProjectAdmin)
 router.get('/getlistusers/:page', AdminController.getListUsers)
 router.put('/deleteusers/:id', AdminController.deleteUsersAdmin)
+router.get('/gethistorydonate/:page', AdminController.getHistoryDonate)
+router.put('/getstatisticusers',AdminController.getStatisticUsers)
+router.put('/getstatisticprojects',AdminController.getStatisticProject)
+router.put('/getstatisticdonate',AdminController.getStatisticDonation)
 module.exports=router

@@ -56,7 +56,7 @@ export const loginAction = (username, password)=>{
                 password
             }
         }).then((res)=>{
-            console.log(res.data)
+            // console.log(res.data)
             if(res.data.status !== "error"){
                 Swal.fire({
                     position: 'top-end',
@@ -79,27 +79,17 @@ export const loginAction = (username, password)=>{
 }
 
 export const reLogin=(res)=>{
-    console.log(res,'resrelogin')
+    // console.log(res,'resrelogin')
     return dispatch =>{
         dispatch({type:USER_LOGIN_SUCCESS, payload:res})
     }
 }
 
 export const Logoutaction=()=>{
-    // return {
-    //     type: USER_LOGOUT
-    // }
-    console.log('masuklogout')
+    // console.log('masuklogout')
     return dispatch =>{
         dispatch({type:`USER_LOGOUT`})
         dispatch({type:'FALSEREDIRECT'})
     }
         
 }
-
-
-// export const testasu=()=>{
-//     return {
-//         type : `USER_LOGOUT`
-//     }
-// }

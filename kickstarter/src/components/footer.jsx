@@ -2,13 +2,12 @@ import React from 'react';
 import '../css/footer.css'
 import {useSelector} from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
-
 
 
 export default function Footer(){
     const { footer } = useSelector(state=>state.HeaderFooter)
+
     if(footer===1){
         return null
     }

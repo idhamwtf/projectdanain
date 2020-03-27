@@ -197,7 +197,7 @@ module.exports={
         }
         // console.log(req.params.page)
         const {data} = req.body.data
-        var sql=`SELECT ps.*,c.category,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate FROM projectusers ps left join donation d on d.idproject=ps.id left join users u on u.id=ps.iduser left join category c on c.id=ps.categoryproject WHERE ps.deleted=0 AND ps.namaproject LIKE '%${data}%' OR c.category LIKE '%${data}%' group by ps.id limit ? offset ?;`
+        var sql=`SELECT ps.*,c.category,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate FROM projectusers ps left join donation d on d.idproject=ps.id left join users u on u.id=ps.iduser left join category c on c.id=ps.categoryproject WHERE ps.deleted=0 AND ps.namaproject LIKE '%${data}%' or ps.deleted=0 AND c.category LIKE '%${data}%' group by ps.id limit ? offset ?;`
         console.log(pageSize)
         // console.log(offset)
         mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{

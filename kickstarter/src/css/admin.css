@@ -47,3 +47,12 @@
     -moz-box-shadow: 5px 5px 15px 2px rgba(197,202,233,1);
     box-shadow: 5px 5px 15px 2px rgba(197,202,233,1);
 }
+
+
+.statistic-box{
+    border: 1px pink solid;
+    width: 30%;
+    margin: 5% 2% 0 2%;
+    height: 40vh;
+    font-size: 38px;
+}

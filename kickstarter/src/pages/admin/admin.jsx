@@ -1,35 +1,29 @@
 import React from 'react';
 import '../../css/admin.css'
-// import MaterialTable from 'material-table';
 import { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import {changeFooterAction, changeHeaderAction} from '../../redux/actions'
-// import { Button, Link } from '@material-ui/core';
-// import VisibilityIcon from '@material-ui/icons/Visibility';
+import {changeFooterAction} from '../../redux/actions'
 import { useState } from 'react';
-// import {dataProject, getbukti} from './redux/actions'
-// import Axios from 'axios';
-// import { APIURL, APIURLimage } from '../../helper/apiurl';
-// import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import Listbayar from './listbayar'
 import ListProject from './listproject'
 import ListUsers from './listusers'
 import Notfound from './../../components/notfound404'
+import HistoryDonate from './historydonasi'
+import StatisticWeb from './statistic'
 
 
 export default function Admin(){
 
-  const [list,setlist]=useState('')
   const dispatch = useDispatch()
+
+  const [list,setlist]=useState('')
+
   const {role} = useSelector(state=>state.auth)
 
   useEffect(()=>{
     dispatch(changeFooterAction(1))
-    
-  })
-
-
+  },[])
 
 if(role==='1'){
   return (
@@ -39,6 +33,8 @@ if(role==='1'){
                   <div className='isi-dashboard'  onClick={()=>setlist('user')}>LIST USER</div>
                   <div className='isi-dashboard' onClick={()=>setlist('project')}>LIST PROJECT</div>
                   <div className='isi-dashboard' onClick={()=>setlist('payment')}>LIST PEMBAYARAN</div>
+                  <div className='isi-dashboard' onClick={()=>setlist('historydonate')}>HISTORY DONATE</div>
+                  <div className='isi-dashboard' onClick={()=>setlist('statistic')}>STATISTIC</div>
                 </div>
               {
                 list==='user'?
@@ -47,6 +43,10 @@ if(role==='1'){
                 <ListProject/>:
                 list==='payment'?
                 <Listbayar/>:
+                list==='historydonate'?
+                <HistoryDonate/>:
+                list==='statistic'?
+                <StatisticWeb/>:
                 <div className='box-admin' style={{width:'100%', backgroundColor:'#e8eaf6', color:'black', paddingTop:'20px',fontSize:'50px'}}> Welcome to admin dashboard</div>
               }
               </div>

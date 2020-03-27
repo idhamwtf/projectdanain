@@ -5,8 +5,6 @@ import Button from '@material-ui/core/Button';
 import '../../css/register.css'
 import {useDispatch, useSelector} from 'react-redux'
 import { changeHeaderAction, changeFooterAction, UserRegister} from '../../redux/actions'
-// import { Redirect } from 'react-router-dom';
-import Swal from 'sweetalert2'
 import { Redirect } from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
 
@@ -22,14 +20,13 @@ const useStyles = makeStyles(theme => ({
 
 function Register() {
     const classes = useStyles();
+    const dispatch = useDispatch()
+
     let usernameref = createRef()
     let passwordref = createRef() 
     let repasswordref = createRef()
     let emailref = createRef() 
 
-    
-    // const { HeaderFooter } = useSelector(state=>state.HeaderFooter)
-    const dispatch = useDispatch()
     const {register,errorgalengkap} = useSelector(state=>state.auth)
     
     useEffect(()=>{
@@ -54,25 +51,24 @@ function Register() {
     if(register){
       return <Redirect to={'/login'}/>
     }
-  return (
-      <div className='register'>
-        <form className={classes.root}  noValidate autoComplete="off">
-            <div className='d-flex flex-column box-login'> 
-        <TextField id="standard-basic" label="Username" className='m-2' inputRef={usernameref} />
-        <TextField id="standard-basic" label="Password" type="password" className='m-2' inputRef={passwordref}/>
-        <TextField id="standard-basic" label="Re-enter Password" type="password" className='m-2' inputRef={repasswordref}/>
-        <TextField id="standard-basic" label="Email" type="email" className='m-2' inputRef={emailref}/>
-        {/* <div style={{marginTop:'auto'}}> */}
-        <Button variant="contained" color="primary" className='button-login m-2' onClick={onClickRegister} >Register</Button>
-        {errorgalengkap?
-        <Alert severity="error">There's an empty field above, please fill it</Alert>:
-        null
-        }
-        {/* </div> */}
-            </div>
-        </form>
-      </div>
-  );
+    return (
+        <div className='register'>
+          <form className={classes.root}  noValidate autoComplete="off">
+          <div className='d-flex flex-column box-login'> 
+            <TextField id="standard-basic" label="Username" className='m-2' inputRef={usernameref} />
+            <TextField id="standard-basic" label="Password" type="password" className='m-2' inputRef={passwordref}/>
+            <TextField id="standard-basic" label="Re-enter Password" type="password" className='m-2' inputRef={repasswordref}/>
+            <TextField id="standard-basic" label="Email" type="email" className='m-2' inputRef={emailref}/>
+            <Button variant="contained" color="primary" className='button-login m-2' onClick={onClickRegister} >Register</Button>
+            {errorgalengkap?
+            <Alert severity="error">There's an empty field above, please fill it</Alert>
+            :
+            null
+            }
+                </div>
+            </form>
+        </div>
+    );
 }
 
 export default Register;

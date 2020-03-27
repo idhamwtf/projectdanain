@@ -1,13 +1,8 @@
 import React from 'react';
 import '../../css/admin.css'
-// import MaterialTable from 'material-table';
 import { useEffect } from 'react';
-import {useDispatch} from 'react-redux'
-// import { changeHeaderAction, changeFooterAction, loginAction} from '../../redux/actions'
 import { Button, Link } from '@material-ui/core';
-// import VisibilityIcon from '@material-ui/icons/Visibility';
 import { useState } from 'react';
-// import {dataProject, getbukti} from './redux/actions'
 import Axios from 'axios';
 import { APIURL, APIURLimage } from '../../helper/apiurl';
 import Lightbox from 'react-image-lightbox';
@@ -17,24 +12,15 @@ import NumberFormat from 'react-number-format'
 
 const ListBayar=()=>{
 
-
-    // const dispatch = useDispatch()
-
   const [page,setPage]=useState(1)
   const [pager,setpager]=useState({})
   const [dataproject,setdataproject]=useState([])
-//   const [list,setlist]=useState('')
   const [proof,setproof]=useState(false)
   const [linkgambar,setlinkgambar]=useState('')
   const [update,setupdate]=useState(true)
   
 
-  // const dataproject = useSelector(state=>state.admin)
-    // const dispatch = useDispatch()
-
     useEffect(()=>{
-    //   dispatch(changeFooterAction(1))
-      // dispatch(getbukti(page))
       Axios.get(`${APIURL}admin/getlistproject/${page}`)
       .then((res)=>{
           setdataproject(res.data.pageOfdata)
@@ -65,11 +51,9 @@ const ListBayar=()=>{
         })
       },[update])
 
-      console.log(dataproject)
       const onClickButtonDelete=(id)=>{
         Axios.put(`${APIURL}admin/deleteprojectadmin/${id}`)
         .then((res)=>{
-            // console.log(res)
             setupdate(true)
         }).catch((err)=>{
             console.log(err)
@@ -96,10 +80,7 @@ const ListBayar=()=>{
                         <div style={{marginBottom:'1px',fontWeight:'500'}}>By user : {val.username}</div>
                         <div style={{marginBottom:'1px',fontWeight:'500'}}>Tanggal post : {val.datepost}</div>
                     </div>
-                    {/* <div>Jumlah Donasi</div> */}
-                    {/* <div style={{marginLeft:'200px'}}>Bukti Donasi</div> */}
                     <div className='d-flex flex-row' style={{marginTop:'10px',marginBottom:'15px', marginLeft:'auto', marginRight:'7px'}}>
-                    {/* <Button variant="contained" color="primary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>Confirm</Button> */}
                     <Button onClick={()=>onClickButtonDelete(val.id)} variant="contained" color="secondary" style={{width:'200px',height:'85px', textAlign:'center', marginRight:'10px',marginTop:'70px'}}>DELETE PROJECT</Button>
                     </div>
                 </div>
@@ -120,10 +101,7 @@ const ListBayar=()=>{
                         <div style={{marginBottom:'1px',fontWeight:'500'}}>By user : {val.username}</div>
                         <div style={{marginBottom:'1px',fontWeight:'500'}}>Tanggal post : {val.datepost}</div>
                     </div>
-                    {/* <div>Jumlah Donasi</div> */}
-                    {/* <div style={{marginLeft:'200px'}}>Bukti Donasi</div> */}
                     <div className='d-flex flex-row' style={{marginTop:'10px',marginBottom:'15px', marginLeft:'auto', marginRight:'7px'}}>
-                    {/* <Button variant="contained" color="primary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>Confirm</Button> */}
                     <Button onClick={()=>onClickButtonDelete(val.id)} variant="contained" color="secondary" style={{width:'200px',height:'85px', textAlign:'center', marginRight:'10px',marginTop:'70px'}}>DELETE PROJECT</Button>
                     </div>
                 </div>

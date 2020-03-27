@@ -3,29 +3,31 @@ import '../../css/admin.css'
 import { useEffect } from 'react';
 import {useDispatch} from 'react-redux'
 import {changeFooterAction} from '../../redux/actions'
-import { Button, Link } from '@material-ui/core';
+import { Link } from '@material-ui/core';
 import { useState } from 'react';
 import Axios from 'axios';
-import { APIURL} from '../../helper/apiurl';
+import { APIURL,APIURLimage} from '../../helper/apiurl';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { Table } from 'reactstrap';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import NumberFormat from 'react-number-format'
 
 const Listusers=()=>{
     const dispatch = useDispatch()
 
     const [page,setPage]=useState(1)
     const [pager,setpager]=useState({})
-    const [datausers,setdatausers]=useState([])
+    const [datahistorydonasi,setdatahistorydonasi]=useState([])
     const [proof,setproof]=useState(false)
     const [linkgambar,setlinkgambar]=useState('')
     const [update,setupdate]=useState(true)
 
     useEffect(()=>{
         dispatch(changeFooterAction(1))
-        Axios.get(`${APIURL}admin/getlistusers/${page}`)
+        Axios.get(`${APIURL}admin/gethistorydonate/${page}`)
         .then((res)=>{
-            setdatausers(res.data.pageOfdata)
+            setdatahistorydonasi(res.data.pageOfdata)
             setpager(res.data.pager)
         }).catch((err)=>{
             console.log(err)
@@ -33,9 +35,9 @@ const Listusers=()=>{
       },[])
   
       useEffect(()=>{
-        Axios.get(`${APIURL}admin/getlistusers/${page}`)
+        Axios.get(`${APIURL}admin/gethistorydonate/${page}`)
         .then((res)=>{
-            setdatausers(res.data.pageOfdata)
+            setdatahistorydonasi(res.data.pageOfdata)
             setpager(res.data.pager)
         }).catch((err)=>{
             console.log(err)
@@ -43,9 +45,9 @@ const Listusers=()=>{
       },[page])
   
       useEffect(()=>{
-          Axios.get(`${APIURL}admin/getlistusers/${page}`)
+          Axios.get(`${APIURL}admin/gethistorydonate/${page}`)
           .then((res)=>{
-              setdatausers(res.data.pageOfdata)
+              setdatahistorydonasi(res.data.pageOfdata)
               setpager(res.data.pager)
               setupdate(false)
           }).catch((err)=>{
@@ -53,43 +55,48 @@ const Listusers=()=>{
           })
         },[update])
 
-        const onClickButtonDelete=(id)=>{
-            Axios.put(`${APIURL}admin/deleteusers/${id}`)
-            .then((res)=>{
-                setupdate(true)
-            }).catch((err)=>{
-                console.log(err)
-            })
-        }
-
-
-        const renderListUsersTable=()=>{
-            return datausers.map((val,index)=>{
+        const renderHistoryDonate=()=>{
+            const tes =(image)=>{
+                setproof(true)
+                setlinkgambar(image)
+              }
+            return datahistorydonasi.map((val,index)=>{
                 if(page===1){
                     return(
                         <tr key={index}>
                         <td>{index+1}</td>
+                        <td>{val.namaproject}</td>
                         <td>{val.username}</td>
-                        <td>{val.email}</td>
-                        <td>{val.role==='1'?'admin':'user'}</td>
-                        <td>{val.created}</td>
-                        <td><Button onClick={()=>onClickButtonDelete(val.id)}variant="contained" color="secondary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>DELETE</Button></td>
+                        <td>Rp. <NumberFormat value={val.jumlahdonasi} displayType={"text"} thousandSeparator={true} /></td>
+                        <td><div onClick={()=>tes(APIURLimage+val.buktidonasi)}>Donation Proof here <br></br> <VisibilityIcon/></div></td>
+                        <td>{val.confirm===1?
+                        <span style={{color:'green'}}>Accepted</span>:
+                        <span style={{color:'red'}}>Rejected</span>}
+                        </td>
+                        
+                        
                     </tr>
                     )
                 }else{
                     return(
                     <tr key={index}>
                         <td>{(index+1*(page+10))-1}</td>
+                        <td>{val.namaproject}</td>
                         <td>{val.username}</td>
-                        <td>{val.email}</td>
-                        <td>{val.role==='1'?'admin':'user'}</td>
-                        <td>{val.created}</td>
-                        <td><Button onClick={()=>onClickButtonDelete(val.id)}variant="contained" color="secondary" style={{width:'100px',height:'35px', textAlign:'center', marginLeft:'5px',marginBottom:'10px'}}>DELETE</Button></td>
+                        <td>Rp. <NumberFormat value={val.jumlahdonasi} displayType={"text"} thousandSeparator={true} /></td>
+                        <td><div onClick={()=>tes(APIURLimage+val.buktidonasi)}>Donation Proof here <br></br> <VisibilityIcon/></div></td>
+                        <td>{val.confirm===1?
+                        <span style={{color:'green'}}>Accepted</span>:
+                        <span style={{color:'red'}}>Rejected</span>}
+                        </td>
+                        
+                        
                     </tr>
                 )
                 }
             })
         }
+
 
     return(
         <div style={{width:'100%'}}>
@@ -106,15 +113,15 @@ const Listusers=()=>{
                         <thead>
                           <tr>
                             <th>No</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Created</th>
-                            <th>Action</th>
+                            <th>Title Project</th>
+                            <th>Donated</th>
+                            <th>Amount</th>
+                            <th>Proof</th>
+                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {renderListUsersTable()}
+                          {renderHistoryDonate()}
                         </tbody>
                       </Table>
                     {/* ends    */}

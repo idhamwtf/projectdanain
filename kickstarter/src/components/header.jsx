@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../css/header.css';
-import SearchIcon from '@material-ui/icons/Search';
 import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -9,14 +8,12 @@ import {Logoutaction} from './../redux/actions'
 import {DropdownToggle, DropdownMenu, DropdownItem, Dropdown } from "reactstrap";
 
 function Header (){
-    // const [loading,setloading] = useState(true)
-
-    const {username,role,loginstatus} = useSelector(state=>state.auth)
-
     const dispatch = useDispatch()
 
-    // const [isOpen, setIsOpen] = useState(false);
+    const {username,role} = useSelector(state=>state.auth)
+
     const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const toggleAccount = () => setDropdownOpen(prevState => !prevState);
 
 
@@ -27,13 +24,10 @@ function Header (){
 
     const Logoutuser=()=>{
         dispatch(Logoutaction())
-        // dispatch(testasu())
         localStorage.removeItem('id')
         localStorage.removeItem('username')
     }
 
-    // console.log(loginstatus,'12312312')
-      
     if(role==='1'){
         return(
             <div>
@@ -55,36 +49,23 @@ function Header (){
                 </div>
                 <div className='box-header' style={{width:'20%'}}>
                 <Link to={'/'} style={{textDecoration:'none'}}>
-                    {/* <img src="https://theme.zdassets.com/theme_assets/7902/7a63b03d352488898e3a870d14a103ddffe4b5fe.png" alt="" style={{width:'90%', height:'90%', padding:'20px'}} /> */}
                     <span className= 'tes-font' style={{fontWeight:'900', fontSize:'42px', color:'#01579b ', textDecoration:'none'}}>DANA•IN</span>
                 </Link>
                 </div>
                 <div className='box-header d-flex flex-row justify-content-end' style={{width:'40%'}}>
-                    {/* <div className='mt-3 mx-2'>Search</div>
-                    <div className='mt-3 mr-3'><SearchIcon/></div> */}
-                    {
                         loginstatus
                         ?
                         <div className='d-flex flex-row'>
-                        {/* <Link to='/' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Hello, {username}</span></div></Link>
-                        <Link to='/myproject' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>My Project</span></div></Link>
-                        <Link to='/' style={{textDecoration:'none', color:'black'}} onClick={Logoutuser}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Logout</span></div></Link> */}
                         <Dropdown style={{textDecoration:'none', marginTop:'9px'}} isOpen={dropdownOpen} toggle={toggleAccount}>
                             <DropdownToggle nav style={{color:'black'}}>
                             Hello, {username} <ArrowDropDownIcon style={{marginBottom:'8px'}} />
                             </DropdownToggle>
                             <DropdownMenu right>
                             <DropdownItem style={{ marginBottom: '10px' }}>
-                            <Link to='/myproject' style={{textDecoration:'none', color:'black'}}>My Project</Link>
-                            </DropdownItem>
-                            {/* <DropdownItem>
-                                <Link to="/cart">Cart</Link>
+                            <Link to='/myproject' style={{textDecoration:'none', color:'black',fontSize:'18px'}}>My Project</Link>
                             </DropdownItem>
                             <DropdownItem>
-                                <NavLink href="/payment">Payment</NavLink>
-                            </DropdownItem> */}
-                            {/* <DropdownItem divider /> */}
-                            <DropdownItem>
+                            <Link to='/myproject' style={{textDecoration:'none', color:'black',fontSize:'18px'}}>My Donate History</Link>   
                             </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
@@ -96,28 +77,6 @@ function Header (){
                         <Link to='/login' style={{textDecoration:'none', color:'black'}}><div className='my-3 mx-4'><span style={{textDecoration:'none', color:'black'}}>Login</span></div></Link>
                         </div>
                     }
-                    
-                    {/* {
-                        loginstatus===true?
-                        <div className='d-flex flex-row'>
-                        <Dropdown style={{textDecoration:'none', marginTop:'7px'}} isOpen={dropdownOpen} toggle={toggleAccount}>
-                            <DropdownToggle nav style={{color:'black'}}>
-                            Hello, {username} <ArrowDropDownIcon style={{marginBottom:'2px'}} />
-                            </DropdownToggle>
-                            <DropdownMenu right>
-                            <DropdownItem style={{ marginBottom: '10px' }}>
-                            <Link to='/myproject' style={{textDecoration:'none', color:'black'}}>My Project</Link>
-                            </DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>
-                                <Link to='/' style={{textDecoration:'none', color:'black'}} onClick={Logoutuser}>Logout</Link >
-                            </DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                        </div>
-                        :
-                        <div>asdasd</div>
-                    } */}
                 </div>
             </div>
             
@@ -127,7 +86,5 @@ function Header (){
     
     
 }
-
-
 
 export default Header;
