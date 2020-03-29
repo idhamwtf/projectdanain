@@ -34,7 +34,7 @@ if(role==='1'){
                   <div className='isi-dashboard' onClick={()=>setlist('project')}>LIST PROJECT</div>
                   <div className='isi-dashboard' onClick={()=>setlist('payment')}>LIST PEMBAYARAN</div>
                   <div className='isi-dashboard' onClick={()=>setlist('historydonate')}>HISTORY DONATE</div>
-                  <div className='isi-dashboard' onClick={()=>setlist('statistic')}>STATISTIC</div>
+                  <div className='isi-dashboard' onClick={()=>setlist('statistic')}>REPORT</div>
                 </div>
               {
                 list==='user'?

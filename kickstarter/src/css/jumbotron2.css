@@ -10,7 +10,8 @@
     /* border: 1px blue solid; */
     width: 20.7%;
     margin: 60px 15px;
-    height: 95%;
+    min-height: 96%;
+    position: relative;
 }
 
 .jumbotron2-box>div{

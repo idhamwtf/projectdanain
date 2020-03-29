@@ -65,7 +65,7 @@ function Header (){
                             <Link to='/myproject' style={{textDecoration:'none', color:'black',fontSize:'18px'}}>My Project</Link>
                             </DropdownItem>
                             <DropdownItem>
-                            <Link to='/myproject' style={{textDecoration:'none', color:'black',fontSize:'18px'}}>My Donate History</Link>   
+                            <Link to='/historyusers' style={{textDecoration:'none', color:'black',fontSize:'18px'}}>History</Link>   
                             </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>

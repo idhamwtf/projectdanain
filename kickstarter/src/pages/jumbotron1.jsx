@@ -67,7 +67,7 @@ function Jumbotron1(){
         return datarecommend.map((val,index)=>{
             return(
                 <div className='minibox-jumobtron1 d-flex flex-row' key={index}>
-                    <div className='mr-3' style={{width:'43%'}}>
+                    <div className='mr-3' style={{width:'43%',borderBottom:'none'}}>
                     <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                         <img  style={{width:'100%', height:'100%'}} src={`${APIURLimage+val.gambarproject}`} alt=""/>
                     </Link>

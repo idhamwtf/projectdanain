@@ -52,12 +52,12 @@ const ExploreContent=(props)=>{
         return datasearch.map((val,index)=>{
             return (
                 <div className='box-search-content-isi d-flex flex-row' key={index}>
-                <div style={{height:'100%', width:'30%', border:'none'}}>
+                <div style={{height:'100%', width:'40%', border:'none'}}>
                     <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                         <img src={`${APIURLimage+val.gambarproject}`} style={{width:'100%',height:'100%'}} />
                     </Link>
                 </div>
-                <div className='d-flex flex-column' style={{width:'66%', marginLeft:'0'}}>
+                <div className='d-flex flex-column' style={{width:'55%', marginLeft:'0'}}>
                     <div style={{fontSize:'26px', fontWeight:'700'}}>
                     <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                         {val.namaproject}

@@ -127,10 +127,14 @@ module.exports={
         })
     },
     getFeatured:(req,res)=>{
-        // var sql = `select p.*,u.username from projectusers p join users u on p.iduser=u.id where deleted=0 limit 1;`
-        // var sql = `select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where deleted=0 order by id limit 1;`
-        // var sql = `select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.id=${id} and deleted=0;`
         var sql = `select ps.*,c.category,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id left join category c on c.id=ps.categoryproject where ps.deleted=0 group by ps.id order by rand() limit 1;`
+        mysqldb.query(sql,(err,result)=>{
+            if(err) res.status(500).send({message:err})
+            res.status(200).send(result)
+        })
+    },
+    getNewestProject:(req,res)=>{
+        var sql = `select ps.*,c.category,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id left join category c on c.id=ps.categoryproject where ps.deleted=0 group by ps.id order by ps.id desc limit 4;`
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err})
             res.status(200).send(result)
@@ -167,13 +171,13 @@ module.exports={
             offset=pageSize*(page -1)
         }
         // console.log(req.params.page)
-        var sql=`select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.deleted=0 group by ps.id limit ? offset ?;`
+        var sql=`select ps.*,u.username,sum(case when d.confirm=1 then d.jumlahdonasi else 0 end)/ps.targetuang*100 as percentdonate from projectusers ps left join users u on ps.iduser=u.id left join donation d on d.idproject=ps.id where ps.deleted=0 group by ps.id order by rand() limit ? offset ?;`
         mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{
             if(err2) res.status(500).send({message:err2})
             const pageOfdata = result2
             return res.status(200).send({pageOfdata, pager})
         })
-         })
+        })
     },
     getProjectSearch:(req,res)=>{
         var sqlcount=`select count(*) as count from projectusers where deleted=0`
@@ -207,5 +211,69 @@ module.exports={
             return res.status(200).send({pageOfdata, pager})
         })
          })
+    },
+    getHistoryDonate:(req,res)=>{
+        var id = req.params.id
+        var sqlcount=`select count(*) as count from donation where iddonatur=${id}`
+
+        let dataCount
+        mysqldb.query(sqlcount, (err1,result1)=>{
+        if(err1) res.status(500).send({message:error})
+        dataCount = result1[0].count
+        //trigger pindah page
+        // console.log(dataCount)
+        const page = parseInt(req.params.page) || 1
+        const pageSize = 10;
+        const pager = paginate(dataCount, page, pageSize)
+        
+        //untuk limit database
+        let offset
+        if(page === 1){
+            offset=0
+        }else{
+            offset=pageSize*(page -1)
+        }
+
+
+        // console.log(req.params.page)
+        var sql=`select d.*,pu.* from donation d join users udonatur on d.iddonatur=udonatur.id join projectusers pu on pu.id=d.idproject where iddonatur=${id} limit ? offset ?;`
+        mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{
+            if(err2) res.status(500).send({message:err2})
+            const pageOfdata = result2
+            return res.status(200).send({pageOfdata, pager})
+        })
+        })
+    },
+    getHistorySupporterProject:(req,res)=>{
+        var id = req.params.id
+        var sqlcount=`select count(*) as count from donation d join projectusers pu on d.idproject=pu.id where pu.iduser=${id} and d.confirm=1;`
+
+        let dataCount
+        mysqldb.query(sqlcount, (err1,result1)=>{
+        if(err1) res.status(500).send({message:error})
+        dataCount = result1[0].count
+        //trigger pindah page
+        // console.log(dataCount)
+        const page = parseInt(req.params.page) || 1
+        const pageSize = 20;
+        const pager = paginate(dataCount, page, pageSize)
+        
+        //untuk limit database
+        let offset
+        if(page === 1){
+            offset=0
+        }else{
+            offset=pageSize*(page -1)
+        }
+
+        // console.log(req.params.page)
+        var sql=`select d.*,pu.iduser,pu.namaproject,u.username from donation d join projectusers pu on d.idproject=pu.id left join users u on u.id=d.iddonatur where pu.iduser=${id} and d.confirm=1 limit ? offset ?;`
+        mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{
+            if(err2) res.status(500).send({message:err2})
+            const pageOfdata = result2
+            return res.status(200).send({pageOfdata, pager})
+        })
+        })
+        
     }
 }

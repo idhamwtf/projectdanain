@@ -3,11 +3,11 @@ import './../css/explore.css'
 import './../css/searchbox.css'
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
-import {changeHeaderAction} from './../redux/actions'
-import { useDispatch } from 'react-redux';
-import { APIURL } from '../helper/apiurl';
-import Axios from 'axios';
-import {Link} from 'react-router-dom'
+// import {changeHeaderAction} from './../redux/actions'
+// import { useDispatch } from 'react-redux';
+// import { APIURL } from '../helper/apiurl';
+// import Axios from 'axios';
+// import {Link} from 'react-router-dom'
 import ExploreContent from './explorecontent'
 
 

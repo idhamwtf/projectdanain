@@ -1,0 +1,36 @@
+.history-content{
+    border: 1px pink solid;
+    width: 150vh;
+    max-width: 160vh;
+    margin:0 3% 6% 3%;
+    height: 27vh;
+    max-height: 30vh;
+}
+
+.history-supporter-box{
+    /* border: 1px pink solid; */
+    margin: 0% 5% 2% 3%;
+    min-height: 8vh;
+    max-height: 15vh;
+    min-width: 158vh;
+    max-width: 158vh;
+    -webkit-box-shadow: 2px 2px 5px 1px rgba(179,229,252,1);
+    -moz-box-shadow: 2px 2px 5px 1px rgba(179,229,252,1);
+    box-shadow: 2px 2px 5px 1px rgba(179,229,252,1);
+    padding-top: 17px;
+    text-align: left;
+}
+
+
+.teswoi{
+    border: 1px white solid;
+    width: 155vh;
+    min-height: 86vh;
+    /* max-height: 310vh; */
+    position: relative;
+}
+
+.teswoi2{
+    position: absolute;
+    bottom: 0px;;
+}

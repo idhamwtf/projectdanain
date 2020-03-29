@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import './App.css';
+import './css/slick.css'
 import Header from './components/header'
 import Headercategory from './components/headercategory'
 import Homepage from './components/homepage'
@@ -18,6 +19,8 @@ import MyProject from './pages/users/myproject'
 import {getbukti} from './redux/actions'
 import ProjectDetails from './pages/users/projectdetails'
 import ExploreProject from './pages/exploreproject'
+import Notfound404 from './components/notfound404'
+import HistoryUsers from './pages/users/history'
 
 function App() {
   const dispatch = useDispatch()
@@ -67,6 +70,8 @@ function App() {
         <Route path={'/myproject'} exact component = {MyProject}/>
         <Route path={'/projectdetail/:id'} exact component ={ProjectDetails}/>
         <Route path={'/explore'} exact component={ExploreProject}/>
+        <Route path={'/historyusers'} exact component={HistoryUsers}/>
+        <Route path={'/'} component={Notfound404}/>
         {/* <Route path={'/logout'} exact component ={Homepage}/> */}
       </Switch>
       <Footer/>

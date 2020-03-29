@@ -165,18 +165,21 @@ module.exports={
     getStatisticUsers:(req,res)=>{
         const tanggal = moment().format('D');
         const bulan = moment().format('M');
+        console.log(req.body)
+        const bulanselect = req.body.bulan
+        const tahunselect = req.body.tahun
         const tahun = moment().format('Y');
         // console.log(tanggal,bulan,tahun)
-        var sql = `SELECT COUNT(*) as COUNTUSERS from users where created between '${tahun}-${bulan}-${tanggal} 00:00:00' AND '${tahun}-${bulan}-${tanggal} 23:59:59';`
+        var sql = `SELECT COUNT(*) as COUNTUSERS from users where YEAR(created) = ${tahun} AND MONTH(created) = ${bulan} AND DAY(created) = ${tanggal};`
 
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err,error:'error1'})
             var today = result
-            var sql = `SELECT COUNT(*) as COUNTUSERS from users where created between '${tahun}-${bulan}-01 00:00:00' AND '${tahun}-${bulan}-31 23:59:59';`
+            var sql = `SELECT COUNT(*) as COUNTUSERS from users where YEAR(created) = ${tahun} AND MONTH(created) = ${bulanselect}`
             mysqldb.query(sql,(err2,result2)=>{
                 if(err2) res.status(500).send({message:err2,error2:'error2'})
                 var monthly = result2
-                var sql = `SELECT COUNT(*) as COUNTUSERS from users where created between '${tahun}-01-01 00:00:00' AND '${tahun}-12-31 23:59:59';`
+                var sql = `SELECT COUNT(*) as COUNTUSERS from users where YEAR(created) = ${tahunselect}`
                 mysqldb.query(sql,(err3,result3)=>{
                     if(err3) res.status(500).send({message:err,error3:'error3'})
                     var annual = result3
@@ -190,17 +193,19 @@ module.exports={
         const tanggal = moment().format('D');
         const bulan = moment().format('M');
         const tahun = moment().format('Y');
+        const bulanselect = req.body.bulan
+        const tahunselect = req.body.tahun
         // console.log(tanggal,bulan,tahun)
-        var sql = `SELECT COUNT(*) as COUNTPROJECTS from projectusers where datepost between '${tahun}-${bulan}-${tanggal} 00:00:00' AND '${tahun}-${bulan}-${tanggal} 23:59:59';`
+        var sql = `SELECT COUNT(*) as COUNTPROJECTS from projectusers where YEAR(datepost) = ${tahun} AND MONTH(datepost) = ${bulan} AND DAY(datepost) = ${tanggal};`
 
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err,error:'error1'})
             var today = result
-            var sql = `SELECT COUNT(*) as COUNTPROJECTS from projectusers where datepost between '${tahun}-${bulan}-01 00:00:00' AND '${tahun}-${bulan}-31 23:59:59';`
+            var sql = `SELECT COUNT(*) as COUNTPROJECTS from projectusers where YEAR(datepost) = ${tahun} AND MONTH(datepost) = ${bulanselect};`
             mysqldb.query(sql,(err2,result2)=>{
                 if(err2) res.status(500).send({message:err2,error2:'error2'})
                 var monthly = result2
-                var sql = `SELECT COUNT(*) as COUNTPROJECTS from projectusers where datepost between '${tahun}-01-01 00:00:00' AND '${tahun}-12-31 23:59:59';`
+                var sql = `SELECT COUNT(*) as COUNTPROJECTS from projectusers where YEAR(datepost) = ${tahunselect};`
                 mysqldb.query(sql,(err3,result3)=>{
                     if(err3) res.status(500).send({message:err,error3:'error3'})
                     var annual = result3
@@ -214,17 +219,19 @@ module.exports={
         const tanggal = moment().format('D');
         const bulan = moment().format('M');
         const tahun = moment().format('Y');
+        const bulanselect = req.body.bulan
+        const tahunselect = req.body.tahun
         // console.log(tanggal,bulan,tahun)
-        var sql = `SELECT COUNT(*) as COUNTDONATION from donation where datedonate between '${tahun}-${bulan}-${tanggal} 00:00:00' AND '${tahun}-${bulan}-${tanggal} 23:59:59';`
+        var sql = `SELECT COUNT(*) as COUNTDONATION from donation where YEAR(datedonate) = ${tahun} AND MONTH(datedonate) = ${bulan} AND DAY(datedonate) = ${tanggal};`
 
         mysqldb.query(sql,(err,result)=>{
             if(err) res.status(500).send({message:err,error:'error1'})
             var today = result
-            var sql = `SELECT COUNT(*) as COUNTDONATION from donation where datedonate between '${tahun}-${bulan}-01 00:00:00' AND '${tahun}-${bulan}-31 23:59:59';`
+            var sql = `SELECT COUNT(*) as COUNTDONATION from donation where YEAR(datedonate) = ${tahun} AND MONTH(datedonate) = ${bulanselect};`
             mysqldb.query(sql,(err2,result2)=>{
                 if(err2) res.status(500).send({message:err2,error2:'error2'})
                 var monthly = result2
-                var sql = `SELECT COUNT(*) as COUNTDONATION from donation where datedonate between '${tahun}-01-01 00:00:00' AND '${tahun}-12-31 23:59:59';`
+                var sql = `SELECT COUNT(*) as COUNTDONATION from donation where YEAR(datedonate) = ${tahunselect};`
                 mysqldb.query(sql,(err3,result3)=>{
                     if(err3) res.status(500).send({message:err,error3:'error3'})
                     var annual = result3

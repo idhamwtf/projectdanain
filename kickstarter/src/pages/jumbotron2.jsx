@@ -1,78 +1,74 @@
 import React from 'react';
 import '../css/jumbotron2.css'
 import Progressbar from '../components/progressbar'
+import Slider from "react-slick";
+import { useEffect } from 'react';
+import Axios from 'axios';
+import { APIURL, APIURLimage } from '../helper/apiurl';
+import { useState } from 'react';
+import {Link} from 'react-router-dom'
+
+
 
 export default function Jumbotron2(){
-    return (
-        <div className='jumbotron-2 d-flex flex-row' style={{marginTop:'25px'}}>
+
+    const [newproject,setnewproject]=useState()
+    const [loading,setloading]=useState(true)
+
+    useEffect(()=>{
+        Axios.get(`${APIURL}product/getnewest`)
+        .then((res)=>{
+            // console.log(res.data)
+            setnewproject(res.data)
+            setloading(false)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    },[])
+
+    const renderNewProject=()=>{
+        return newproject.map((val,index)=>{
+            return(
             <div className='jumbotron2-box' style={{marginLeft:'5%'}}>
+                <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
                 <div>
-                    <img style={{width:'100%'}} src="https://ksr-ugc.imgix.net/assets/027/913/883/26ef6b50ea3962431665856e6312fb23_original.jpg?ixlib=rb-2.1.0&crop=faces&w=352&h=198&fit=crop&v=1580406840&auto=format&frame=1&q=92&s=bde0ac2fced52dbccc141462fb58ef14" alt=""/>
-                    <Progressbar value='70' height='7px' color='secondary' />
+                <img style={{width:'100%'}} src={`${APIURLimage+val.gambarproject}`} alt=""/>
+                    <Progressbar value={val.percentdonate} height='7px' color='secondary' />
                 </div>
+                </Link>
                 <div style={{fontWeight:'700', margin:'3px'}}>
-                    The Little Apple Universe
+                    {val.namaproject}
                 </div>
-                <div style={{fontWeight:'400', margin:'10px 3px', fontSize:'14px' }}>
-                    A digital streaming event and platorm for all Little Apple content, super-serving POC in sci-fi and fantasy.<br></br>
+                <div style={{fontWeight:'400',margin:'10px 3px 40px 3px', fontSize:'14px', maxHeight:'30vh', overflow:'hidden'}}>
+                    {val.shortdescproject}<br></br>
                     <span style={{fontWeight:'bold'}}>Story</span><br></br>
-                    Little Apple started off as a live-action sci-fi drama series following a 9-year-old claircognizant (all-knowing) Black girl growing up in Harlem, N.Y. Now, it is so much more and I'm excited to expand this universe with you!
+                    <span style={{maxHeight:'10px'}}>{val.aboutproject}</span>
+                    {/* Little Apple started off as a live-action sci-fi drama series following a 9-year-old claircognizant (all-knowing) Black girl growing up in Harlem, N.Y. Now, it is so much more and I'm excited to expand this universe with you! */}
                 </div>
-                <div style={{fontWeight:'400', margin:'33px 3px 0 3px', fontSize:'14px'}}>
-                    By Riley S.Wilson
+                <div style={{fontWeight:'400', fontSize:'14px',position:'absolute', bottom:'0px'}}>
+                    By {val.username}
                 </div>
             </div>
-            <div className='jumbotron2-box'>
+            )
+        })
+    }
+
+      
+    if(loading){
+        return(
             <div>
-                    <img style={{width:'100%'}} src="https://ksr-ugc.imgix.net/assets/027/913/883/26ef6b50ea3962431665856e6312fb23_original.jpg?ixlib=rb-2.1.0&crop=faces&w=352&h=198&fit=crop&v=1580406840&auto=format&frame=1&q=92&s=bde0ac2fced52dbccc141462fb58ef14" alt=""/>
-                    <Progressbar value='70' height='7px' color='secondary' />
-                </div>
-                <div style={{fontWeight:'700', margin:'3px'}}>
-                    The Little Apple Universe
-                </div>
-                <div style={{fontWeight:'400', margin:'10px 3px', fontSize:'14px' }}>
-                    A digital streaming event and platorm for all Little Apple content, super-serving POC in sci-fi and fantasy.<br></br>
-                    <span style={{fontWeight:'bold'}}>Story</span><br></br>
-                    Little Apple started off as a live-action sci-fi drama series following a 9-year-old claircognizant (all-knowing) Black girl growing up in Harlem, N.Y. Now, it is so much more and I'm excited to expand this universe with you!
-                </div>
-                <div style={{fontWeight:'400', margin:'33px 3px 0 3px', fontSize:'14px'}}>
-                    By Riley S.Wilson
-                </div>
-            </div> 
-            <div className='jumbotron2-box'>
+                Loading...
+            </div>
+        )
+    }
+    return (
+        <div className='jumbotron-2 d-flex flex-row' style={{marginTop:'25px'}}>
             <div>
-                    <img style={{width:'100%'}} src="https://ksr-ugc.imgix.net/assets/027/913/883/26ef6b50ea3962431665856e6312fb23_original.jpg?ixlib=rb-2.1.0&crop=faces&w=352&h=198&fit=crop&v=1580406840&auto=format&frame=1&q=92&s=bde0ac2fced52dbccc141462fb58ef14" alt=""/>
-                    <Progressbar value='70' height='7px' color='secondary' />
-                </div>
-                <div style={{fontWeight:'700', margin:'3px'}}>
-                    The Little Apple Universe
-                </div>
-                <div style={{fontWeight:'400', margin:'10px 3px', fontSize:'14px' }}>
-                    A digital streaming event and platorm for all Little Apple content, super-serving POC in sci-fi and fantasy.<br></br>
-                    <span style={{fontWeight:'bold'}}>Story</span><br></br>
-                    Little Apple started off as a live-action sci-fi drama series following a 9-year-old claircognizant (all-knowing) Black girl growing up in Harlem, N.Y. Now, it is so much more and I'm excited to expand this universe with you!
-                </div>
-                <div style={{fontWeight:'400', margin:'33px 3px 0 3px', fontSize:'14px'}}>
-                    By Riley S.Wilson
-                </div>
-            </div> 
-            <div className='jumbotron2-box'>
-            <div>
-                    <img style={{width:'100%'}} src="https://ksr-ugc.imgix.net/assets/027/913/883/26ef6b50ea3962431665856e6312fb23_original.jpg?ixlib=rb-2.1.0&crop=faces&w=352&h=198&fit=crop&v=1580406840&auto=format&frame=1&q=92&s=bde0ac2fced52dbccc141462fb58ef14" alt=""/>
-                    <Progressbar value='70' height='7px' color='secondary' />
-                </div>
-                <div style={{fontWeight:'700', margin:'3px'}}>
-                    The Little Apple Universe
-                </div>
-                <div style={{fontWeight:'400', margin:'10px 3px', fontSize:'14px' }}>
-                    A digital streaming event and platorm for all Little Apple content, super-serving POC in sci-fi and fantasy.<br></br>
-                    <span style={{fontWeight:'bold'}}>Story</span><br></br>
-                    Little Apple started off as a live-action sci-fi drama series following a 9-year-old claircognizant (all-knowing) Black girl growing up in Harlem, N.Y. Now, it is so much more and I'm excited to expand this universe with you!
-                </div>
-                <div style={{fontWeight:'400', margin:'33px 3px 0 3px', fontSize:'14px'}}>
-                    By Riley S.Wilson
-                </div>
-            </div> 
+                <div style={{textAlign:'left', margin:'20px 5% 0% 5%', color:'#757575', fontWeight:'bold', fontSize:'18px'}}>New on DANA•IN</div>
+                <div className='d-flex flex-row'>
+                    {renderNewProject()}
+                 </div>
+            </div>
         </div>
     )
 }
