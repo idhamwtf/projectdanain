@@ -10,7 +10,7 @@
     /* border: 1px solid rgba(0, 0, 0, 0.8); */
     margin: 20px 30px 20px 30px;
     min-height: 60vh;
-    min-width: 43vh;
+    min-width: 40vh;
     max-width: 43vh;
     /* padding: 20px;
     font-size: 30px;
@@ -23,7 +23,7 @@
 
 
 .teswoi{
-    width: 100%;
+    width: 130vh;
     min-height: 86vh;
     position: relative;
 }
@@ -31,4 +31,5 @@
 .teswoi2{
     position: absolute;
     bottom: 0px;;
+    /* margin-top: ; */
 }

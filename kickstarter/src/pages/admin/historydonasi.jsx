@@ -66,7 +66,11 @@ const Listusers=()=>{
                         <tr key={index}>
                         <td>{index+1}</td>
                         <td>{val.namaproject}</td>
-                        <td>{val.username}</td>
+                        <td>
+                        {val.username===null?
+                            'Anonymous':
+                        val.username}
+                        </td>
                         <td>Rp. <NumberFormat value={val.jumlahdonasi} displayType={"text"} thousandSeparator={true} /></td>
                         <td><div onClick={()=>tes(APIURLimage+val.buktidonasi)}>Donation Proof here <br></br> <VisibilityIcon/></div></td>
                         <td>{val.confirm===1?
@@ -82,7 +86,11 @@ const Listusers=()=>{
                     <tr key={index}>
                         <td>{(index+1*(page+10))-1}</td>
                         <td>{val.namaproject}</td>
-                        <td>{val.username}</td>
+                        <td>
+                        {val.username===null?
+                            'Anonymous':
+                        val.username}
+                        </td>
                         <td>Rp. <NumberFormat value={val.jumlahdonasi} displayType={"text"} thousandSeparator={true} /></td>
                         <td><div onClick={()=>tes(APIURLimage+val.buktidonasi)}>Donation Proof here <br></br> <VisibilityIcon/></div></td>
                         <td>{val.confirm===1?

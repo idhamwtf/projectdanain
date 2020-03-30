@@ -6,6 +6,8 @@ import Axios from 'axios';
 import { APIURL, APIURLimage } from '../helper/apiurl';
 import { useState } from 'react';
 import {Link} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitter, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
 function Jumbotron1(){
 
@@ -85,9 +87,9 @@ function Jumbotron1(){
                             By {val.username}
                         </div>
                         <div className='d-flex flex-row'>
-                            <div className='mx-3'>Icon</div>
-                            <div className='mx-3'>Icon</div>
-                            <div className='mx-3'><ThumbUpAltOutlinedIcon/></div>
+                            <div className='mx-3'> <a href="https://www.facebook.com/" style={{textDecoration:'none',color:'black', marginRight:'7px', fontSize:'20px'}}><FontAwesomeIcon icon={faFacebook} /></a></div>
+                            <div className='mx-3'> <a href="https://www.instagram.com/" style={{textDecoration:'none',color:'black', marginRight:'7px',fontSize:'20px'}}><FontAwesomeIcon icon={faInstagram} /></a></div>
+                            <div className='mx-3' style={{marginBottom:'6px'}}><ThumbUpAltOutlinedIcon/></div>
                         </div>
                     </div>
                 </div>

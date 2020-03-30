@@ -161,7 +161,7 @@ module.exports={
         // console.log(dataCount)
         const page = parseInt(req.params.page) || 1
         const pageSize = 3;
-        const pager = paginate(dataCount, page, pageSize)
+        const pager = paginate(15, page, pageSize)
         
         //untuk limit database
         let offset

@@ -3,6 +3,7 @@ import '../css/footer.css'
 import {useSelector} from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { Link } from 'react-router-dom';
 
 
 export default function Footer(){
@@ -18,13 +19,13 @@ export default function Footer(){
                     Follow Our Social Media
                 </div>
                 <div className='footer-box-content-social'>
-                <FontAwesomeIcon icon={faFacebook} /> Facebook 
+                <a href="https://www.facebook.com/" style={{textDecoration:'none',color:'black', marginRight:'7px'}}><FontAwesomeIcon icon={faFacebook} /> Facebook </a>
                 </div>
                 <div className='footer-box-content-social mr-4'>
-                <FontAwesomeIcon icon={faTwitter} /> Twitter
+                <a href="https://www.twitter.com/" style={{textDecoration:'none',color:'black'}}><FontAwesomeIcon icon={faTwitter} /> Twitter</a>
                 </div>
                 <div className='footer-box-content-social mr-1'>
-                <FontAwesomeIcon icon={faInstagram} /> Instagram
+                <a href="https://www.instagram.com/" style={{textDecoration:'none',color:'black', marginRight:'7px'}}><FontAwesomeIcon icon={faInstagram} /> Instagram</a>
                 </div>
                
 

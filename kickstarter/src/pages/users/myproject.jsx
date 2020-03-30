@@ -18,6 +18,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { CustomInput } from 'reactstrap';
 import Axios from 'axios'
+import CurrencyTextField from '@unicef/material-ui-currency-textfield'
 
 
 const useStyles = makeStyles(theme => ({
@@ -234,7 +235,17 @@ const MyProject =()=>{
             <Modal title={`Edit Your ${dataedit.namaproject} Project`} modal={modal} actionfunc={onSubmitProject} toggle={()=>setmodal(!modal) }>
             <TextField className='inputporjectusers m-2' defaultValue={dataedit.namaproject} style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Your Project Name" onChange={onChangeInput} name='namaproject'/>
                 <TextField className='inputporjectusers m-2' defaultValue={dataedit.shortdescproject} style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="What is your project ?" onChange={onChangeInput} name='shortdescproject' />
-                <TextField className='inputporjectusers m-2' defaultValue={dataedit.targetuang} style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Money Goal" onChange={onChangeInput} name='targetuang' />
+                {/* <TextField className='inputporjectusers m-2' defaultValue={dataedit.targetuang} style={{width:'98%', marginTop:'5px'}} id="standard-basic" label="Money Goal" onChange={onChangeInput} name='targetuang' /> */}
+                <CurrencyTextField
+                        label="Money Goal"
+                        name='targetuang'
+                        // value={value}
+                        unselectable
+                        currencySymbol="IDR"
+                        onChange={onChangeInput}
+                        style={{width:'98%'}}
+                        defaultValue={dataedit.targetuang}
+                    />
                 <FormControl className={classes.formControl} style={{width:'98%', marginTop:'5px'}}>
                     <InputLabel id="demo-simple-select-label">Category</InputLabel>
                     <Select
@@ -243,6 +254,7 @@ const MyProject =()=>{
                         id="demo-simple-select"
                         onChange={onChangeInput}
                         name='categoryproject'
+                        defaultValue={dataedit.categoryproject}
                         >
                         {renderCategory()}
                     </Select>

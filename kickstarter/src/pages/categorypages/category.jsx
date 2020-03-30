@@ -90,11 +90,11 @@ const CategoryPage=(props)=>{
     }
     return(
         <div className ='teswoi' style={{minHeight:'89vh', position:'relative'}}>
-            <div style={{fontSize:'60px', marginRight:'3%', fontWeight:'200'}}>{props.match.params.category}</div>
+            <div style={{fontSize:'60px',marginLeft:'50%', fontWeight:'200'}}>{props.match.params.category}</div>
             <div className="grid-container" style={{marginBottom:'50px'}}>
                 {renderDataCategory()}
             </div>
-            <div className ='teswoi2' style={{width: '100%',marginLeft:'40%', position:'absolute', bottom:'0px'}}>
+            <div className ='teswoi2' style={{width: '50%',marginLeft:'62%', position:'absolute', bottom:'0px'}}>
                     {pager.pages && pager.pages.length &&
                     <ul className="pagination">
                         <li className={`page-item first-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>
