@@ -31,8 +31,8 @@ export default function Jumbotron2(){
             return(
             <div className='jumbotron2-box' style={{marginLeft:'5%'}}>
                 <Link to={`/projectdetail/${val.id}`} style={{textDecoration:'none', color:'black'}}>
-                <div>
-                <img style={{width:'100%'}} src={`${APIURLimage+val.gambarproject}`} alt=""/>
+                <div style={{maxWidth:'40vh',height:'26vh'}}>
+                <img style={{width:'100%',height:'100%'}} src={`${APIURLimage+val.gambarproject}`} alt=""/>
                     <Progressbar value={val.percentdonate} height='7px' color='secondary' />
                 </div>
                 </Link>

@@ -21,6 +21,7 @@ import ProjectDetails from './pages/users/projectdetails'
 import ExploreProject from './pages/exploreproject'
 import Notfound404 from './components/notfound404'
 import HistoryUsers from './pages/users/history'
+import CategoryPage from './pages/categorypages/category'
 
 function App() {
   const dispatch = useDispatch()
@@ -71,6 +72,7 @@ function App() {
         <Route path={'/projectdetail/:id'} exact component ={ProjectDetails}/>
         <Route path={'/explore'} exact component={ExploreProject}/>
         <Route path={'/historyusers'} exact component={HistoryUsers}/>
+        <Route path={'/category/:category'} exact component={CategoryPage}/>
         <Route path={'/'} component={Notfound404}/>
         {/* <Route path={'/logout'} exact component ={Homepage}/> */}
       </Switch>

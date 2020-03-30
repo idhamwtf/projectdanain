@@ -16,5 +16,6 @@ router.get('/getrecommend/:page', ProductController.getProjectRecommended)
 router.post('/getsearch/:page',ProductController.getProjectSearch)
 router.put('/gethistorydonate/:id/:page', ProductController.getHistoryDonate)
 router.put('/gethistorysupporterproject/:id/:page', ProductController.getHistorySupporterProject)
+router.get('/getprojectcategory/:category/:page',ProductController.getProjectCategory)
 
 module.exports=router

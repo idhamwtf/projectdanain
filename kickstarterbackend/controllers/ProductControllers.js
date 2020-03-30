@@ -275,5 +275,39 @@ module.exports={
         })
         })
         
+    },
+    getProjectCategory:(req,res)=>{
+        // console.log(req.params.category)
+        var category = req.params.category
+        var sqlcount=`select count(*) as count from projectusers pu left join category c on c.id=pu.categoryproject where c.category='${category}';`
+
+        let dataCount
+        mysqldb.query(sqlcount, (err1,result1)=>{
+        if(err1) res.status(500).send({message:error})
+        dataCount = result1[0].count
+        //trigger pindah page
+        // console.log(dataCount)
+        const page = parseInt(req.params.page) || 1
+        const pageSize = 8;
+        const pager = paginate(dataCount, page, pageSize)
+        
+        //untuk limit database
+        let offset
+        if(page === 1){
+            offset=0
+        }else{
+            offset=pageSize*(page -1)
+        }
+        console.log(pageSize,offset)
+
+        // console.log(req.params.page)
+        var sql=`select pu.*,c.category,u.username from projectusers pu left join category c on c.id=pu.categoryproject left join users u on u.id = pu.iduser where c.category='${category}' and pu.deleted=0 limit ? offset ?;`
+        mysqldb.query(sql,[pageSize,offset],(err2,result2)=>{
+            if(err2) res.status(500).send({message:err2})
+            const pageOfdata = result2
+            return res.status(200).send({pageOfdata, pager})
+        })
+        })
+
     }
 }
